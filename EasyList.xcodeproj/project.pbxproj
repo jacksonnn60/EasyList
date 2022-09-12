@@ -7,23 +7,67 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		791F86C628C8CB3F00C4EB07 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F86C528C8CB3F00C4EB07 /* ImagePicker.swift */; };
+		791F86C828C8DA0500C4EB07 /* ToDoStepDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F86C728C8DA0500C4EB07 /* ToDoStepDescriptionViewModel.swift */; };
+		791F86CC28CA150A00C4EB07 /* ToDoJourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F86CB28CA150A00C4EB07 /* ToDoJourney.swift */; };
+		791F86CE28CA151F00C4EB07 /* DaysListConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F86CD28CA151F00C4EB07 /* DaysListConfiguration.swift */; };
+		791F86D028CA15E100C4EB07 /* ToDoItemConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F86CF28CA15E100C4EB07 /* ToDoItemConfiguration.swift */; };
+		791F86D228CA252E00C4EB07 /* ToDoStepConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791F86D128CA252E00C4EB07 /* ToDoStepConfiguration.swift */; };
+		7957CDF228BF9081008B08FA /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7957CDF128BF9081008B08FA /* Date.swift */; };
+		796E89D128C0B19800622CB3 /* ToDoStepDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796E89D028C0B19800622CB3 /* ToDoStepDescriptionViewController.swift */; };
+		796E89D428C0B2EB00622CB3 /* ToDoStepDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796E89D328C0B2EB00622CB3 /* ToDoStepDescriptionView.swift */; };
 		7983891928BF790F00749176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983891828BF790F00749176 /* AppDelegate.swift */; };
 		7983891B28BF790F00749176 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983891A28BF790F00749176 /* SceneDelegate.swift */; };
-		7983891D28BF790F00749176 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983891C28BF790F00749176 /* ViewController.swift */; };
-		7983892028BF790F00749176 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7983891E28BF790F00749176 /* Main.storyboard */; };
+		7983891D28BF790F00749176 /* DaysListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983891C28BF790F00749176 /* DaysListViewController.swift */; };
 		7983892228BF791100749176 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7983892128BF791100749176 /* Assets.xcassets */; };
 		7983892528BF791100749176 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7983892328BF791100749176 /* LaunchScreen.storyboard */; };
+		7983892E28BF79BB00749176 /* DaysListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983892D28BF79BB00749176 /* DaysListView.swift */; };
+		7983893028BF79CC00749176 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983892F28BF79CC00749176 /* BaseViewController.swift */; };
+		7983893328BF7F0F00749176 /* DayListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983893228BF7F0F00749176 /* DayListCell.swift */; };
+		7983893528BF827A00749176 /* IdentifiableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983893428BF827A00749176 /* IdentifiableView.swift */; };
+		7983893828BF859C00749176 /* DateFormats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983893728BF859C00749176 /* DateFormats.swift */; };
+		7983893A28BF870B00749176 /* ToDoItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983893928BF870B00749176 /* ToDoItemListViewController.swift */; };
+		7983893C28BF875C00749176 /* ToDoItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983893B28BF875C00749176 /* ToDoItemListView.swift */; };
+		7983893E28BF88A300749176 /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7983893D28BF88A300749176 /* ToDoCell.swift */; };
+		798DC8DA28BFB1F7006CFB98 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798DC8D928BFB1F7006CFB98 /* CheckBox.swift */; };
+		79BE38DA28C63C3600391247 /* DaysListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BE38D928C63C3600391247 /* DaysListViewModel.swift */; };
+		79BE392328C7386A00391247 /* EasyListDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79BE392128C7386A00391247 /* EasyListDataModel.xcdatamodeld */; };
+		79BE392B28C7666E00391247 /* ToDoItemListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BE392A28C7666E00391247 /* ToDoItemListViewModel.swift */; };
+		CD0AA4F5A087978DAE0DE08A /* Pods_EasyList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E776BF60DD0B5886BE572315 /* Pods_EasyList.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		791F86C528C8CB3F00C4EB07 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		791F86C728C8DA0500C4EB07 /* ToDoStepDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoStepDescriptionViewModel.swift; sourceTree = "<group>"; };
+		791F86CB28CA150A00C4EB07 /* ToDoJourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoJourney.swift; sourceTree = "<group>"; };
+		791F86CD28CA151F00C4EB07 /* DaysListConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysListConfiguration.swift; sourceTree = "<group>"; };
+		791F86CF28CA15E100C4EB07 /* ToDoItemConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemConfiguration.swift; sourceTree = "<group>"; };
+		791F86D128CA252E00C4EB07 /* ToDoStepConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoStepConfiguration.swift; sourceTree = "<group>"; };
+		7957CDF128BF9081008B08FA /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		796E89D028C0B19800622CB3 /* ToDoStepDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoStepDescriptionViewController.swift; sourceTree = "<group>"; };
+		796E89D328C0B2EB00622CB3 /* ToDoStepDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoStepDescriptionView.swift; sourceTree = "<group>"; };
 		7983891528BF790F00749176 /* EasyList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7983891828BF790F00749176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7983891A28BF790F00749176 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7983891C28BF790F00749176 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7983891F28BF790F00749176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7983891C28BF790F00749176 /* DaysListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysListViewController.swift; sourceTree = "<group>"; };
 		7983892128BF791100749176 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7983892428BF791100749176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7983892628BF791100749176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7983892D28BF79BB00749176 /* DaysListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysListView.swift; sourceTree = "<group>"; };
+		7983892F28BF79CC00749176 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		7983893228BF7F0F00749176 /* DayListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayListCell.swift; sourceTree = "<group>"; };
+		7983893428BF827A00749176 /* IdentifiableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableView.swift; sourceTree = "<group>"; };
+		7983893728BF859C00749176 /* DateFormats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormats.swift; sourceTree = "<group>"; };
+		7983893928BF870B00749176 /* ToDoItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemListViewController.swift; sourceTree = "<group>"; };
+		7983893B28BF875C00749176 /* ToDoItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemListView.swift; sourceTree = "<group>"; };
+		7983893D28BF88A300749176 /* ToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
+		798DC8D928BFB1F7006CFB98 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		79BE38D928C63C3600391247 /* DaysListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysListViewModel.swift; sourceTree = "<group>"; };
+		79BE392228C7386A00391247 /* EasyListDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EasyListDataModel.xcdatamodel; sourceTree = "<group>"; };
+		79BE392A28C7666E00391247 /* ToDoItemListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemListViewModel.swift; sourceTree = "<group>"; };
+		C922BF10112A14554AFAE93D /* Pods-EasyList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyList.debug.xcconfig"; path = "Target Support Files/Pods-EasyList/Pods-EasyList.debug.xcconfig"; sourceTree = "<group>"; };
+		DF0E743843C2370ABAE82328 /* Pods-EasyList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyList.release.xcconfig"; path = "Target Support Files/Pods-EasyList/Pods-EasyList.release.xcconfig"; sourceTree = "<group>"; };
+		E776BF60DD0B5886BE572315 /* Pods_EasyList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +75,58 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD0AA4F5A087978DAE0DE08A /* Pods_EasyList.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24DD1DCD0F8BA8AA2F9C1692 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C922BF10112A14554AFAE93D /* Pods-EasyList.debug.xcconfig */,
+				DF0E743843C2370ABAE82328 /* Pods-EasyList.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		56B9F54C1DA46AEB16D9B541 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E776BF60DD0B5886BE572315 /* Pods_EasyList.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		791F86D328CA283F00C4EB07 /* ToDoJourney */ = {
+			isa = PBXGroup;
+			children = (
+				791F86CB28CA150A00C4EB07 /* ToDoJourney.swift */,
+				796E89D228C0B29100622CB3 /* ToDoStepDescription */,
+				7983893F28BF88DD00749176 /* ToDoItemList */,
+				7983893128BF7CC200749176 /* DaysList */,
+			);
+			path = ToDoJourney;
+			sourceTree = "<group>";
+		};
+		796E89D228C0B29100622CB3 /* ToDoStepDescription */ = {
+			isa = PBXGroup;
+			children = (
+				796E89D028C0B19800622CB3 /* ToDoStepDescriptionViewController.swift */,
+				791F86C728C8DA0500C4EB07 /* ToDoStepDescriptionViewModel.swift */,
+				796E89D328C0B2EB00622CB3 /* ToDoStepDescriptionView.swift */,
+				791F86D128CA252E00C4EB07 /* ToDoStepConfiguration.swift */,
+			);
+			path = ToDoStepDescription;
+			sourceTree = "<group>";
+		};
 		7983890C28BF790F00749176 = {
 			isa = PBXGroup;
 			children = (
 				7983891728BF790F00749176 /* EasyList */,
-				7983891628BF790F00749176 /* Products */,
+				24DD1DCD0F8BA8AA2F9C1692 /* Pods */,
+				56B9F54C1DA46AEB16D9B541 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,20 +136,100 @@
 				7983891528BF790F00749176 /* EasyList.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		7983891728BF790F00749176 /* EasyList */ = {
 			isa = PBXGroup;
 			children = (
-				7983891828BF790F00749176 /* AppDelegate.swift */,
-				7983891A28BF790F00749176 /* SceneDelegate.swift */,
-				7983891C28BF790F00749176 /* ViewController.swift */,
-				7983891E28BF790F00749176 /* Main.storyboard */,
+				791F86C528C8CB3F00C4EB07 /* ImagePicker.swift */,
+				791F86D328CA283F00C4EB07 /* ToDoJourney */,
+				79BE38D828C63A5500391247 /* Extensions */,
+				7983892C28BF795300749176 /* App */,
+				7983893628BF830C00749176 /* Other */,
 				7983892128BF791100749176 /* Assets.xcassets */,
 				7983892328BF791100749176 /* LaunchScreen.storyboard */,
 				7983892628BF791100749176 /* Info.plist */,
+				7983891628BF790F00749176 /* Products */,
+				79BE392128C7386A00391247 /* EasyListDataModel.xcdatamodeld */,
 			);
 			path = EasyList;
+			sourceTree = "<group>";
+		};
+		7983892C28BF795300749176 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				7983891828BF790F00749176 /* AppDelegate.swift */,
+				7983891A28BF790F00749176 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		7983893128BF7CC200749176 /* DaysList */ = {
+			isa = PBXGroup;
+			children = (
+				79BE38D728C63A0000391247 /* Cell */,
+				7983891C28BF790F00749176 /* DaysListViewController.swift */,
+				79BE38D928C63C3600391247 /* DaysListViewModel.swift */,
+				7983892D28BF79BB00749176 /* DaysListView.swift */,
+				791F86CD28CA151F00C4EB07 /* DaysListConfiguration.swift */,
+			);
+			path = DaysList;
+			sourceTree = "<group>";
+		};
+		7983893628BF830C00749176 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				7983893428BF827A00749176 /* IdentifiableView.swift */,
+				7983892F28BF79CC00749176 /* BaseViewController.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		7983893F28BF88DD00749176 /* ToDoItemList */ = {
+			isa = PBXGroup;
+			children = (
+				79BE38D528C639E500391247 /* AdditionalViews */,
+				79BE38D628C639F900391247 /* Cell */,
+				7983893928BF870B00749176 /* ToDoItemListViewController.swift */,
+				79BE392A28C7666E00391247 /* ToDoItemListViewModel.swift */,
+				7983893B28BF875C00749176 /* ToDoItemListView.swift */,
+				791F86CF28CA15E100C4EB07 /* ToDoItemConfiguration.swift */,
+			);
+			path = ToDoItemList;
+			sourceTree = "<group>";
+		};
+		79BE38D528C639E500391247 /* AdditionalViews */ = {
+			isa = PBXGroup;
+			children = (
+				798DC8D928BFB1F7006CFB98 /* CheckBox.swift */,
+			);
+			path = AdditionalViews;
+			sourceTree = "<group>";
+		};
+		79BE38D628C639F900391247 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7983893D28BF88A300749176 /* ToDoCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		79BE38D728C63A0000391247 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7983893228BF7F0F00749176 /* DayListCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		79BE38D828C63A5500391247 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7957CDF128BF9081008B08FA /* Date.swift */,
+				7983893728BF859C00749176 /* DateFormats.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +239,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7983892928BF791100749176 /* Build configuration list for PBXNativeTarget "EasyList" */;
 			buildPhases = (
+				E22DBE992291403B060C2EC7 /* [CP] Check Pods Manifest.lock */,
 				7983891128BF790F00749176 /* Sources */,
 				7983891228BF790F00749176 /* Frameworks */,
 				7983891328BF790F00749176 /* Resources */,
+				891056050B675F275D964948 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,19 +294,81 @@
 			files = (
 				7983892528BF791100749176 /* LaunchScreen.storyboard in Resources */,
 				7983892228BF791100749176 /* Assets.xcassets in Resources */,
-				7983892028BF790F00749176 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		891056050B675F275D964948 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EasyList/Pods-EasyList-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EasyList/Pods-EasyList-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EasyList/Pods-EasyList-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E22DBE992291403B060C2EC7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EasyList-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7983891128BF790F00749176 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7983891D28BF790F00749176 /* ViewController.swift in Sources */,
+				7983893A28BF870B00749176 /* ToDoItemListViewController.swift in Sources */,
+				796E89D428C0B2EB00622CB3 /* ToDoStepDescriptionView.swift in Sources */,
+				796E89D128C0B19800622CB3 /* ToDoStepDescriptionViewController.swift in Sources */,
+				791F86CE28CA151F00C4EB07 /* DaysListConfiguration.swift in Sources */,
+				791F86C828C8DA0500C4EB07 /* ToDoStepDescriptionViewModel.swift in Sources */,
+				7983893328BF7F0F00749176 /* DayListCell.swift in Sources */,
+				791F86D028CA15E100C4EB07 /* ToDoItemConfiguration.swift in Sources */,
+				7983893028BF79CC00749176 /* BaseViewController.swift in Sources */,
+				791F86D228CA252E00C4EB07 /* ToDoStepConfiguration.swift in Sources */,
+				7983891D28BF790F00749176 /* DaysListViewController.swift in Sources */,
+				79BE392328C7386A00391247 /* EasyListDataModel.xcdatamodeld in Sources */,
+				791F86C628C8CB3F00C4EB07 /* ImagePicker.swift in Sources */,
+				7983893E28BF88A300749176 /* ToDoCell.swift in Sources */,
+				7983892E28BF79BB00749176 /* DaysListView.swift in Sources */,
 				7983891928BF790F00749176 /* AppDelegate.swift in Sources */,
+				7957CDF228BF9081008B08FA /* Date.swift in Sources */,
+				7983893528BF827A00749176 /* IdentifiableView.swift in Sources */,
+				79BE38DA28C63C3600391247 /* DaysListViewModel.swift in Sources */,
+				7983893828BF859C00749176 /* DateFormats.swift in Sources */,
+				7983893C28BF875C00749176 /* ToDoItemListView.swift in Sources */,
+				79BE392B28C7666E00391247 /* ToDoItemListViewModel.swift in Sources */,
+				798DC8DA28BFB1F7006CFB98 /* CheckBox.swift in Sources */,
+				791F86CC28CA150A00C4EB07 /* ToDoJourney.swift in Sources */,
 				7983891B28BF790F00749176 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +376,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7983891E28BF790F00749176 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7983891F28BF790F00749176 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7983892328BF791100749176 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,6 +503,7 @@
 		};
 		7983892A28BF791100749176 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C922BF10112A14554AFAE93D /* Pods-EasyList.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -291,7 +513,6 @@
 				INFOPLIST_FILE = EasyList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -309,6 +530,7 @@
 		};
 		7983892B28BF791100749176 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF0E743843C2370ABAE82328 /* Pods-EasyList.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -318,7 +540,6 @@
 				INFOPLIST_FILE = EasyList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -356,6 +577,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		79BE392128C7386A00391247 /* EasyListDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				79BE392228C7386A00391247 /* EasyListDataModel.xcdatamodel */,
+			);
+			currentVersion = 79BE392228C7386A00391247 /* EasyListDataModel.xcdatamodel */;
+			path = EasyListDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7983890D28BF790F00749176 /* Project object */;
 }
