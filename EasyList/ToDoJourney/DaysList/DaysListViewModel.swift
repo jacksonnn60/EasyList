@@ -13,7 +13,7 @@ final class DaysListViewModel {
     
     struct Output {
         var dayItemsDidFetch: VoidClosure
-        var errorDidAppear: ErrorClosure
+        var errorDidAppear: Closure<String>
     }
     
     struct Input {
@@ -48,22 +48,19 @@ final class DaysListViewModel {
         input = .init(
             viewWillAppear: { self.fetchDayItems() },
             newDateDidChoose: { self.createDay(for: $0) },
-            cellDidTap: { self.cellDidTap(view: $0, for: $1) },
+            cellDidTap: {
+                guard $1.item < self.dayItems?.count ?? 0,
+                      let item = self.dayItems?[$1.item] else {
+                    return
+                }
+                self.configuration.router.dayCellDidTap($0, item)
+            },
             removeCellDidHandle: { self.removeItem(for: $0) },
             dayDidMarkAsDone: { self.markAsDone(for: $0) }
         )
     }
     
     // MARK: -
-    
-    private func cellDidTap(view: UIViewController, for indexPath: IndexPath) {
-        guard indexPath.item < dayItems?.count ?? 0,
-              let item = dayItems?[indexPath.item] else {
-            return
-        }
-        
-        configuration.router.dayCellDidTap(view, item)
-    }
     
     private func removeItem(for indexPath: IndexPath) {
         guard indexPath.item < dayItems?.count ?? 0,
@@ -74,9 +71,7 @@ final class DaysListViewModel {
         dayItem.prepareForDeletion()
         managedContext?.delete(dayItem)
         
-        save {
-            self.fetchDayItems()
-        }
+        save { self.fetchDayItems() }
     }
     
     private func markAsDone(for indexPath: IndexPath) {
@@ -92,9 +87,8 @@ final class DaysListViewModel {
             
             dayItem.isFinished = true
             
-            save {
-                self.fetchDayItems()
-            }
+            save { self.fetchDayItems() }
+            
         } catch let error {
             print(error)
         }
@@ -105,12 +99,16 @@ final class DaysListViewModel {
             return
         }
         
-        let item = DayItem(context: managedContext)
-        item.date = date
-        item.isFinished = true
-        
-        save {
-            self.fetchDayItems()
+        if let dayItems = dayItems, !dayItems.contains(where: { $0.date?.getString(formated: .dayCell) == date.getString(formated: .dayCell) })  {
+            
+            let item = DayItem(context: managedContext)
+            item.date = date
+            item.isFinished = true
+            
+            save { self.fetchDayItems() }
+            
+        } else {
+            output?.errorDidAppear("You can't create two days with the same date. Please choose existing day and edit it.")
         }
     }
     
@@ -128,7 +126,15 @@ final class DaysListViewModel {
 
             successBlock?()
         } catch let error {
-            output?.errorDidAppear(error)
+            output?.errorDidAppear(error.localizedDescription)
         }
     }
+    
+    // MARK: - Deinit
+    
+    deinit {
+        input = nil
+        output = nil
+    }
+    
 }

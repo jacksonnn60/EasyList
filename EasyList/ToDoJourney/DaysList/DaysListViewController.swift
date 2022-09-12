@@ -53,19 +53,12 @@ private extension DaysListViewController {
     func setUpOutput() {
         
         viewModel?.output = .init(
-            
             dayItemsDidFetch: {
-                UIView.transition(with: self.baseView.tableView, duration: 0.4, options: .transitionCrossDissolve) {
-                    self.baseView.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.baseView.tableView.reloadDataWithTransition(duration: 0.4)
                 }
             },
-            
-            errorDidAppear: { error in
-                let errorAlert = UIAlertController(title: "Oops!", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(.init(title: "Ok", style: .default))
-                self.present(errorAlert, animated: true)
-            }
-            
+            errorDidAppear: { self.showError(message: $0) }
         )
         
     }

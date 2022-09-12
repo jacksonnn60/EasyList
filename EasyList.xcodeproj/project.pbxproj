@@ -35,6 +35,9 @@
 		79BE392B28C7666E00391247 /* ToDoItemListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BE392A28C7666E00391247 /* ToDoItemListViewModel.swift */; };
 		CD0AA4F5A087978DAE0DE08A /* Pods_EasyList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E776BF60DD0B5886BE572315 /* Pods_EasyList.framework */; };
 		EE6F526428CF536D00F08BD3 /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526328CF536D00F08BD3 /* Closures.swift */; };
+		EE6F526628CF581E00F08BD3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526528CF581E00F08BD3 /* String.swift */; };
+		EE6F526828CF5AAE00F08BD3 /* Alert+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526728CF5AAE00F08BD3 /* Alert+Error.swift */; };
+		EE6F526A28CF5B6700F08BD3 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526928CF5B6700F08BD3 /* TableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +73,9 @@
 		DF0E743843C2370ABAE82328 /* Pods-EasyList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyList.release.xcconfig"; path = "Target Support Files/Pods-EasyList/Pods-EasyList.release.xcconfig"; sourceTree = "<group>"; };
 		E776BF60DD0B5886BE572315 /* Pods_EasyList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE6F526328CF536D00F08BD3 /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
+		EE6F526528CF581E00F08BD3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		EE6F526728CF5AAE00F08BD3 /* Alert+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Error.swift"; sourceTree = "<group>"; };
+		EE6F526928CF5B6700F08BD3 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,8 +235,11 @@
 		79BE38D828C63A5500391247 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				EE6F526728CF5AAE00F08BD3 /* Alert+Error.swift */,
 				7957CDF128BF9081008B08FA /* Date.swift */,
 				7983893728BF859C00749176 /* DateFormats.swift */,
+				EE6F526528CF581E00F08BD3 /* String.swift */,
+				EE6F526928CF5B6700F08BD3 /* TableView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -363,8 +372,11 @@
 				79BE392328C7386A00391247 /* EasyListDataModel.xcdatamodeld in Sources */,
 				791F86C628C8CB3F00C4EB07 /* ImagePicker.swift in Sources */,
 				7983893E28BF88A300749176 /* ToDoCell.swift in Sources */,
+				EE6F526628CF581E00F08BD3 /* String.swift in Sources */,
 				7983892E28BF79BB00749176 /* DaysListView.swift in Sources */,
 				7983891928BF790F00749176 /* AppDelegate.swift in Sources */,
+				EE6F526A28CF5B6700F08BD3 /* TableView.swift in Sources */,
+				EE6F526828CF5AAE00F08BD3 /* Alert+Error.swift in Sources */,
 				7957CDF228BF9081008B08FA /* Date.swift in Sources */,
 				7983893528BF827A00749176 /* IdentifiableView.swift in Sources */,
 				79BE38DA28C63C3600391247 /* DaysListViewModel.swift in Sources */,

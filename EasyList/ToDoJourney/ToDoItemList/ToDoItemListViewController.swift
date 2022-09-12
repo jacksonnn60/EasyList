@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Combine
 
 final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
     
@@ -47,9 +46,7 @@ final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
         )
         return menu
     }()
-    
-    private var subscriptions = Set<AnyCancellable>()
-    
+        
     var viewModel: ToDoItemListViewModel?
     
     // MARK: - Lifecycle
@@ -57,13 +54,16 @@ final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBarItems()
-        setUpObservation()
+        
+        viewModel?.setUpInput()
+        setUpOutput()
         setUpTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.fetchToDoItems()
+        viewModel?.input?.viewWillAppear()
+        
         setUpImage()
         
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -76,21 +76,24 @@ final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
     }
 }
 
-// MARK: - Combine integration
+// MARK: - SetUp Output
 
 private extension ToDoItemListViewController {
-    func setUpObservation() {
-        viewModel?.$toDoItems.sink { [weak self] _ in
-            guard let self = self else { return }
+    func setUpOutput() {
+        viewModel?.output = .init(
             
-            UIView.transition(with: self.baseView.tableView, duration: 0.4, options: .transitionCrossDissolve) {
-                self.baseView.tableView.reloadData()
-            }
-        } .store(in: &subscriptions)
-        
-        viewModel?.$isFinished.sink { [weak self] isFinishedToDoList in
-            self?.baseView.statusLabel.text = isFinishedToDoList ? "Done" : "You have something to do"
-        } .store(in: &subscriptions)
+            toDoItemsDidFetch: {
+                DispatchQueue.main.async {
+                    self.baseView.tableView.reloadDataWithTransition(duration: 0.4)
+                }
+            },
+            
+            toDoStatusDidChange: { isFinished in
+                self.baseView.statusLabel.text = isFinished ? "Done" : "You have something to do"
+            },
+            
+            errorDidAppear: { self.showError(message: $0) }
+        )
     }
 }
 
@@ -106,7 +109,7 @@ private extension ToDoItemListViewController {
                 return
             }
             
-            self.viewModel?.createToDoItem(with: title)
+            self.viewModel?.input?.didAddNewToDoItem(title)
         })
         alert.addAction(.init(title: "Cancel", style: .destructive))
         present(alert, animated: true)
@@ -122,7 +125,7 @@ private extension ToDoItemListViewController {
     }
     
     func deleteDidChoose() {
-        viewModel?.deleteDay()
+        viewModel?.input?.deleteDayMenuOptionDidChoose()
         
         navigationController?.popViewController(animated: true)
     }
@@ -168,7 +171,7 @@ private extension ToDoItemListViewController {
 
 extension ToDoItemListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel?.toDoCellDidTap(view: self, for: indexPath)
+        viewModel?.input?.cellDidTap((self, indexPath))
     }
 }
 
@@ -190,7 +193,8 @@ extension ToDoItemListViewController: UITableViewDataSource {
                 [
                     UIContextualAction(style: .destructive, title: "Remove") { [unowned self] _, view, _ in
                         view.backgroundColor = .systemRed
-                        self.viewModel?.removeItem(for: indexPath)
+                        
+                        self.viewModel?.input?.removeCellDidHandle(indexPath)
                     }
                 ]
         )
@@ -213,7 +217,7 @@ extension ToDoItemListViewController: UITableViewDataSource {
             make.height.equalTo(tableView.contentSize.height)
         }
         cell.checkBox.checkBoxDidToggle = { [weak self] isChecked in
-            self?.viewModel?.checkBoxDidToggle(for: indexPath, toggleResult: isChecked)
+            self?.viewModel?.input?.checkBoxDidToggle((indexPath, isChecked))
             
             UIView.animate(withDuration: 0.4) {
                 cell.toDoTitleLabel.layer.opacity = isChecked ? 0.5 : 1.0

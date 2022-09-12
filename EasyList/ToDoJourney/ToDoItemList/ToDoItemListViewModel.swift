@@ -5,19 +5,47 @@
 //  Created by Basistyi, Yevhen on 06/09/2022.
 //
 
-import Foundation
 import CoreData
-import Combine
 import UIKit
 import Resolver
 
 final class ToDoItemListViewModel {
     
+    struct Output {
+        var toDoItemsDidFetch: VoidClosure
+        var toDoStatusDidChange: Closure<Bool>
+        var errorDidAppear: Closure<String>
+    }
+    
+    struct Input {
+        var viewWillAppear: VoidClosure
+        var checkBoxDidToggle: Closure<(IndexPath, Bool)>
+        var cellDidTap: Closure<(UIViewController, IndexPath)>
+        var removeCellDidHandle: Closure<IndexPath>
+        var deleteDayMenuOptionDidChoose: VoidClosure
+        var imageDidPick: Closure<UIImage>
+        var didAddNewToDoItem: Closure<String>
+    }
+    
+    // MARK: -
+    
     @OptionalInjected var managedContext: NSManagedObjectContext?
     let configuration: ToDoJourney.ToDoItemList.Configuration
     
-    @Published var toDoItems: [ToDoItem] = []
-    @Published var isFinished: Bool = false
+    var output: Output?
+    var input: Input?
+    
+    var toDoItems: [ToDoItem] = [] {
+        didSet {
+            output?.toDoItemsDidFetch()
+        }
+    }
+    
+    var isFinished: Bool = false {
+        didSet {
+            output?.toDoStatusDidChange(isFinished)
+        }
+    }
     
     let dayItem: DayItem
     
@@ -28,42 +56,42 @@ final class ToDoItemListViewModel {
         self.configuration = configuration
     }
     
-    // MARK: -
-    
-    func toDoCellDidTap(view: UIViewController, for indexPath: IndexPath) {
-        configuration.router.toDoItemCellDidTap(view, toDoItems[indexPath.item])
+    func setUpInput() {
+        input = .init(
+            viewWillAppear: { self.fetchToDoItems() },
+            checkBoxDidToggle: { self.checkBoxDidToggle(for: $0, toggleResult: $1) },
+            cellDidTap: {
+                self.configuration.router.toDoItemCellDidTap($0, self.toDoItems[$1.item])
+            },
+            removeCellDidHandle: { self.removeItem(for: $0) },
+            deleteDayMenuOptionDidChoose: { self.deleteDay() },
+            imageDidPick: { self.saveImage($0) },
+            didAddNewToDoItem: { self.createToDoItem(with: $0) }
+        )
     }
     
-    func checkBoxDidToggle(for indexPath: IndexPath, toggleResult: Bool) {
+    // MARK: -
+    
+    private func checkBoxDidToggle(for indexPath: IndexPath, toggleResult: Bool) {
         let toDoItem = toDoItems[indexPath.item]
         
         toDoItem.isFinished = toggleResult
         
-        save { error in
-            guard error == nil else {
-                return
-            }
-            
+        save {
             self.toDoItems[indexPath.item].isFinished = toggleResult
             self.updateProgressState()
         }
     }
     
-    func removeItem(for indexPath: IndexPath) {
+    private func removeItem(for indexPath: IndexPath) {
         let item = toDoItems[indexPath.item]
         item.prepareForDeletion()
         managedContext?.delete(item)
         
-        save { error in
-            guard error == nil else {
-                return
-            }
-            
-            self.toDoItems.remove(at: indexPath.item)
-        }
+        save { self.fetchToDoItems() }
     }
     
-    func deleteDay() {
+    private func deleteDay() {
         dayItem.prepareForDeletion()
         managedContext?.delete(dayItem)
         
@@ -72,14 +100,7 @@ final class ToDoItemListViewModel {
             managedContext?.delete($0)
         }
         
-        save { error in
-            guard error == nil else {
-                return
-            }
-            
-            self.fetchToDoItems()
-        }
-        
+        save { self.fetchToDoItems() }
     }
     
     func saveImage(_ image: UIImage) {
@@ -88,7 +109,7 @@ final class ToDoItemListViewModel {
         save()
     }
     
-    func createToDoItem(with title: String) {
+    private func createToDoItem(with title: String) {
         guard let managedContext = managedContext else {
             return
         }
@@ -99,16 +120,10 @@ final class ToDoItemListViewModel {
         item.creationDate = Date()
         item.isFinished = false
         
-        save { error in
-            guard error == nil else {
-                return
-            }
-            
-            self.fetchToDoItems()
-        }
+        save { self.fetchToDoItems() }
     }
     
-    func fetchToDoItems() {
+    private func fetchToDoItems() {
         do {
             toDoItems = (try managedContext?.fetch(ToDoItem.fetchRequest()) ?? []).filter { $0.date == dayItem.date }
             
@@ -118,17 +133,7 @@ final class ToDoItemListViewModel {
         }
     }
     
-    func save(completion: ((Error?) -> ())? = nil) {
-        do {
-            try managedContext?.save()
-            
-            completion?(nil)
-        } catch let error {
-            completion?(error)
-        }
-    }
-    
-    func updateProgressState() {
+    private func updateProgressState() {
         isFinished = toDoItems.filter { !$0.isFinished }.isEmpty
         
         if isFinished != dayItem.isFinished {
@@ -136,6 +141,23 @@ final class ToDoItemListViewModel {
             save()
         }
         
+    }
+    
+    private func save(successBlock: VoidClosure? = nil) {
+        do {
+            try managedContext?.save()
+
+            successBlock?()
+        } catch let error {
+            output?.errorDidAppear(error.localizedDescription)
+        }
+    }
+    
+    // MARK: - Deinit
+    
+    deinit {
+        input = nil
+        output = nil
     }
     
 }
