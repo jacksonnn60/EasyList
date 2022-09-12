@@ -45,7 +45,6 @@ final class ToDoItemListViewModel {
             }
             
             self.toDoItems[indexPath.item].isFinished = toggleResult
-            
             self.updateProgressState()
         }
     }
@@ -68,9 +67,9 @@ final class ToDoItemListViewModel {
         dayItem.prepareForDeletion()
         managedContext?.delete(dayItem)
         
-        toDoItems.forEach { toDoItem in
-            toDoItem.prepareForDeletion()
-            managedContext?.delete(toDoItem)
+        toDoItems.forEach {
+            $0.prepareForDeletion()
+            managedContext?.delete($0)
         }
         
         save { error in

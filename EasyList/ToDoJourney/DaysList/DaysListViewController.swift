@@ -10,8 +10,6 @@ import Combine
 
 final class DaysListViewController: BaseViewController<DaysListView> {
     
-    private var subscriptions = Set<AnyCancellable>()
-    
     var viewModel: DaysListViewModel?
     
     // MARK: - Lifecycle
@@ -19,17 +17,19 @@ final class DaysListViewController: BaseViewController<DaysListView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBarItems()
-        setUpTableView()
-        setUpObservation()
         
-        baseView.newDateDidChoose = { [weak self] in
-            self?.viewModel?.createDay(for: $0)
-        }
+        viewModel?.setUpInput()
+        setUpTableView()
+        setUpOutput()
+        
+        baseView.newDateDidChoose = viewModel?.input?.newDateDidChoose
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel?.fetchDayItems()
+        
+        viewModel?.input?.viewWillAppear()
+        
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -46,18 +46,28 @@ final class DaysListViewController: BaseViewController<DaysListView> {
     
 }
 
-// MARK: - Combine integration
+// MARK: - SetUp Output
 
 private extension DaysListViewController {
     
-    func setUpObservation() {
-        viewModel?.$dayItems.sink { [weak self] _ in
-            guard let self = self else { return }
+    func setUpOutput() {
+        
+        viewModel?.output = .init(
             
-            UIView.transition(with: self.baseView.tableView, duration: 0.4, options: .transitionCrossDissolve) {
-                self.baseView.tableView.reloadData()
+            dayItemsDidFetch: {
+                UIView.transition(with: self.baseView.tableView, duration: 0.4, options: .transitionCrossDissolve) {
+                    self.baseView.tableView.reloadData()
+                }
+            },
+            
+            errorDidAppear: { error in
+                let errorAlert = UIAlertController(title: "Oops!", message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(.init(title: "Ok", style: .default))
+                self.present(errorAlert, animated: true)
             }
-        } .store(in: &subscriptions)
+            
+        )
+        
     }
     
 }
@@ -65,15 +75,11 @@ private extension DaysListViewController {
 // MARK: - Setup Actions
 
 private extension DaysListViewController {
-    
     func setUpTableView() {
         baseView.tableView.dataSource = self
         baseView.tableView.delegate = self
-        baseView.tableView.register(
-            DayListCell.self, forCellReuseIdentifier: DayListCell.viewIdentifier
-        )
+        baseView.tableView.register(DayListCell.self, forCellReuseIdentifier: DayListCell.viewIdentifier)
     }
-    
 }
 
 
@@ -89,7 +95,7 @@ private extension DaysListViewController {
 
 extension DaysListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel?.dayCellDidTap(view: self, for: indexPath)
+        viewModel?.input?.cellDidTap((self, indexPath))
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -97,8 +103,7 @@ extension DaysListViewController: UITableViewDelegate {
             actions:
                 [
                     UIContextualAction(style: .normal, title: "Mark as done") { [unowned self] action, view, closure in
-                        
-                        self.viewModel?.markAsDone(for: indexPath)
+                        self.viewModel?.input?.dayDidMarkAsDone(indexPath)
                     }
                 ]
         )
@@ -110,7 +115,7 @@ extension DaysListViewController: UITableViewDelegate {
                 [
                     UIContextualAction(style: .destructive, title: "Remove") { action, view, closure in
                         action.backgroundColor = .secondarySystemFill
-                        self.viewModel?.removeItem(for: indexPath)
+                        self.viewModel?.input?.removeCellDidHandle(indexPath)
                     }
                 ]
         )
@@ -123,10 +128,10 @@ extension DaysListViewController: UITableViewDelegate {
                 children:
                     [
                         UIAction(title: "Mark as done", image: .init(systemName: "checkmark.seal"), state: .off) { _ in
-                            self.viewModel?.markAsDone(for: indexPath)
+                            self.viewModel?.input?.dayDidMarkAsDone(indexPath)
                         },
                         UIAction(title: "Delete", image: .init(systemName: "trash"), attributes: .destructive, state: .off) { _ in
-                            self.viewModel?.removeItem(for: indexPath)
+                            self.viewModel?.input?.removeCellDidHandle(indexPath)
                         }
                     ]
             )

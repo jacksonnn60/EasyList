@@ -5,18 +5,38 @@
 //  Created by Basistyi, Yevhen on 05/09/2022.
 //
 
-import Foundation
-import Combine
 import CoreData
 import UIKit
 import Resolver
 
 final class DaysListViewModel {
     
+    struct Output {
+        var dayItemsDidFetch: VoidClosure
+        var errorDidAppear: ErrorClosure
+    }
+    
+    struct Input {
+        var viewWillAppear: VoidClosure
+        var newDateDidChoose: Closure<Date>
+        var cellDidTap: Closure<(UIViewController, IndexPath)>
+        var removeCellDidHandle: Closure<IndexPath>
+        var dayDidMarkAsDone: Closure<IndexPath>
+    }
+    
+    // MARK: -
+    
+    var output: Output?
+    var input: Input?
+    
     @OptionalInjected var managedContext: NSManagedObjectContext?
     private let configuration: ToDoJourney.DaysList.Configuration
-    
-    @Published var dayItems: [DayItem]?
+            
+    var dayItems: [DayItem]? {
+        didSet {
+            output?.dayItemsDidFetch()
+        }
+    }
     
     // MARK: - Init
     
@@ -24,9 +44,19 @@ final class DaysListViewModel {
         self.configuration = configuration
     }
     
+    func setUpInput() {
+        input = .init(
+            viewWillAppear: { self.fetchDayItems() },
+            newDateDidChoose: { self.createDay(for: $0) },
+            cellDidTap: { self.cellDidTap(view: $0, for: $1) },
+            removeCellDidHandle: { self.removeItem(for: $0) },
+            dayDidMarkAsDone: { self.markAsDone(for: $0) }
+        )
+    }
+    
     // MARK: -
     
-    func dayCellDidTap(view: UIViewController, for indexPath: IndexPath) {
+    private func cellDidTap(view: UIViewController, for indexPath: IndexPath) {
         guard indexPath.item < dayItems?.count ?? 0,
               let item = dayItems?[indexPath.item] else {
             return
@@ -35,7 +65,7 @@ final class DaysListViewModel {
         configuration.router.dayCellDidTap(view, item)
     }
     
-    func removeItem(for indexPath: IndexPath) {
+    private func removeItem(for indexPath: IndexPath) {
         guard indexPath.item < dayItems?.count ?? 0,
               let dayItem = dayItems?[indexPath.item] else {
             return
@@ -44,36 +74,25 @@ final class DaysListViewModel {
         dayItem.prepareForDeletion()
         managedContext?.delete(dayItem)
         
-        save { error in
-            guard error == nil else {
-                return
-            }
-            
+        save {
             self.fetchDayItems()
         }
     }
     
-    func markAsDone(for indexPath: IndexPath) {
+    private func markAsDone(for indexPath: IndexPath) {
         guard indexPath.item < dayItems?.count ?? 0,
               let dayItem = dayItems?[indexPath.item] else {
             return
         }
         
         do {
-            let toDoItems = (try self.managedContext?.fetch(ToDoItem.fetchRequest()) ?? [])
+            (try managedContext?.fetch(ToDoItem.fetchRequest()) ?? [])
                 .filter { $0.date == dayItem.date }
-            
-            toDoItems.forEach {
-                $0.isFinished = true
-            }
+                .forEach { $0.isFinished = true }
             
             dayItem.isFinished = true
             
-            save { error in
-                guard error == nil else {
-                    return
-                }
-                
+            save {
                 self.fetchDayItems()
             }
         } catch let error {
@@ -81,7 +100,7 @@ final class DaysListViewModel {
         }
     }
     
-    func createDay(for date: Date) {
+    private func createDay(for date: Date) {
         guard let managedContext = managedContext else {
             return
         }
@@ -90,16 +109,12 @@ final class DaysListViewModel {
         item.date = date
         item.isFinished = true
         
-        save { error in
-            guard error == nil else {
-                return
-            }
-            
+        save {
             self.fetchDayItems()
         }
     }
     
-    func fetchDayItems() {
+    private func fetchDayItems() {
         do {
             dayItems = try managedContext?.fetch(DayItem.fetchRequest())
         } catch let error {
@@ -107,14 +122,13 @@ final class DaysListViewModel {
         }
     }
     
-    func save(completion: ((Error?) -> ())? = nil) {
+    private func save(successBlock: VoidClosure? = nil) {
         do {
             try managedContext?.save()
-            
-            completion?(nil)
+
+            successBlock?()
         } catch let error {
-            completion?(error)
+            output?.errorDidAppear(error)
         }
     }
-    
 }
