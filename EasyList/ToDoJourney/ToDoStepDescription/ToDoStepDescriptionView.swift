@@ -33,26 +33,26 @@ final class ToDoStepDescriptionView: UIView, IdentifiableView  {
 //        return $0
 //    }(UILabel())
     
-    let toDoItemTitleLabel: UILabel = {
-        $0.text = "To Do Item Label"
+    let toDoItemTitleTextView: UITextView = {
+        $0.isUserInteractionEnabled = false
         $0.font = .systemFont(ofSize: 18, weight: .regular)
         $0.textColor = .label
         return $0
-    }(UILabel())
+    }(UITextView())
     
-    private let titleLabel: UILabel = {
+    let descriptionTextView: UITextView = {
+        $0.isUserInteractionEnabled = false
+        $0.font = .systemFont(ofSize: 15, weight: .regular)
+        $0.textColor = .label
+        return $0
+    }(UITextView())
+    
+    private let descriptionLabel: UILabel = {
         $0.text = "Description"
         $0.font = .systemFont(ofSize: 13, weight: .semibold)
         $0.textColor = .secondaryLabel
         return $0
     }(UILabel())
-    
-    let descriptionTextView: UITextView = {
-        $0.isUserInteractionEnabled = false
-        $0.font = .systemFont(ofSize: 15, weight: .regular)
-        $0.textAlignment = .justified
-        return $0
-    }(UITextView())
     
     let editButton: UIButton = {
         $0.setTitle("Edit", for: .normal)
@@ -83,12 +83,11 @@ final class ToDoStepDescriptionView: UIView, IdentifiableView  {
     private func addComponents() {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
-        contentView.addSubview(toDoItemTitleLabel)
+        contentView.addSubview(toDoItemTitleTextView)
 //        contentView.addSubview(creationDateLabel)
         contentView.addSubview(editButton)
 //        contentView.addSubview(clockImageView)
-        contentView.addSubview(titleLabel)
+        contentView.addSubview(descriptionLabel)
         contentView.addSubview(descriptionTextView)
     }
     
@@ -100,14 +99,15 @@ final class ToDoStepDescriptionView: UIView, IdentifiableView  {
             make.edges.equalToSuperview()
             make.width.equalTo(snp.width)
         }
-        toDoItemTitleLabel.snp.makeConstraints { make in
+        toDoItemTitleTextView.snp.makeConstraints { make in
+            make.height.equalTo(0)
             make.top.equalToSuperview().offset(32)
             make.left.equalToSuperview().inset(16)
-            make.right.equalTo(editButton.snp.left).inset(8)
+            make.right.equalTo(editButton.snp.left).inset(-8)
         }
         editButton.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(16)
-            make.centerY.equalTo(toDoItemTitleLabel)
+            make.centerY.equalTo(toDoItemTitleTextView)
             make.width.equalTo(80)
             make.height.equalTo(34)
         }
@@ -115,15 +115,14 @@ final class ToDoStepDescriptionView: UIView, IdentifiableView  {
         //            make.right.equalTo(saveButton.snp.left)
         //            make.centerY.equalTo(saveButton)
         //        }
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(toDoItemTitleLabel.snp.bottom).offset(8)
-            make.left.equalTo(toDoItemTitleLabel)
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(toDoItemTitleTextView.snp.bottom).offset(8)
+            make.left.equalTo(toDoItemTitleTextView)
         }
         descriptionTextView.snp.makeConstraints { make in
             make.height.equalTo(0)
-            make.top.equalTo(titleLabel.snp.bottom).offset(16)
-            make.right.equalToSuperview().inset(16)
-            make.left.equalTo(toDoItemTitleLabel)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(8)
+            make.right.left.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(32)
         }
     }

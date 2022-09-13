@@ -53,6 +53,7 @@ final class ToDoCell: UITableViewCell, IdentifiableView {
     private func anchorViews() {
         toDoTitleLabel.snp.makeConstraints { make in
             make.height.equalTo(52)
+            make.right.equalTo(checkBox.snp.left).inset(-8)
             make.left.equalToSuperview().inset(18)
             make.top.bottom.equalToSuperview()
         }
