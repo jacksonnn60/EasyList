@@ -144,20 +144,7 @@ extension DaysListViewController: UITableViewDataSource {
             return .init()
         }
         
-        //            cell.dayImageView.image = UIImage(data: imageData)
         cell.setImage(dayItem.imageData)
-        //        } else {
-        //            cell.dayImageView.backgroundColor =
-        //            [
-        //                .systemBlue,
-        //                .systemCyan,
-        //                .systemPink,
-        //                .systemTeal
-        //
-        //            ].shuffled().last
-        
-        //        }
-        
         cell.dateLabel.text = dayItem.date?.getString(formated: .dayCell)
         cell.statusLabel.text = dayItem.isFinished ? "Done" : "You have something to do"
         

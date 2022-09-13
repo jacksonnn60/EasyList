@@ -13,6 +13,10 @@ final class DayListCell: UITableViewCell, IdentifiableView {
     
     // MARK: - View components
     
+    private lazy var geometryView: UIView = {
+       return $0
+    }(UIHostingController(rootView: GeometryAnimationView()).view)
+    
     private lazy var statusEffectView: UIVisualEffectView = {
         $0.effect = UIBlurEffect(style: .systemUltraThinMaterial)
         $0.clipsToBounds = true
@@ -49,7 +53,7 @@ final class DayListCell: UITableViewCell, IdentifiableView {
         return $0
     }(UILabel())
     
-    let dayImageView: UIImageView = {
+    private let dayImageView: UIImageView = {
         $0.isUserInteractionEnabled = true
         return $0
     }(UIImageView())
@@ -69,6 +73,8 @@ final class DayListCell: UITableViewCell, IdentifiableView {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        refreshImageViewSubviews()
+        
         dayImageView.image = nil
         dayImageView.subviews.forEach { $0.removeFromSuperview() }
     }
@@ -103,26 +109,35 @@ final class DayListCell: UITableViewCell, IdentifiableView {
         if let imageData = imageData {
             dayImageView.image = UIImage(data: imageData)
         } else {
-            guard let geometryView = UIHostingController.init(rootView: GeometryAnimationView()).view else {
-                return
-            }
-            
             dayImageView.addSubview(geometryView)
             
             geometryView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
             
-            statusLabel.textColor = [UIColor.systemBlue, UIColor.red, UIColor.systemIndigo].shuffled().first
-            dateLabel.textColor = [UIColor.systemBlue, UIColor.red, UIColor.systemIndigo].shuffled().first
-            statusEffectView.layer.borderColor = [UIColor.systemBlue, UIColor.red, UIColor.systemIndigo].shuffled().first?.cgColor
-            statusEffectView.layer.borderWidth = 1
-            dateEffectView.layer.borderColor = [UIColor.systemBlue, UIColor.red, UIColor.systemIndigo].shuffled().first?.cgColor
-            dateEffectView.layer.borderWidth = 1
+            colorImageViewSubviews()
             
             bringSubviewToFront(statusEffectView)
             bringSubviewToFront(dateEffectView)
         }
+    }
+    
+    private func refreshImageViewSubviews() {
+        statusLabel.font = .systemFont(ofSize: 12, weight: .semibold)
+        statusLabel.textColor = .systemBackground
+        dateLabel.font = .systemFont(ofSize: 13)
+        dateLabel.textColor = .systemBackground
+        statusEffectView.layer.borderWidth = 0
+        dateEffectView.layer.borderWidth = 0
+    }
+    
+    private func colorImageViewSubviews() {
+        statusLabel.textColor = .randomColor
+        dateLabel.textColor = .randomColor
+        statusEffectView.layer.borderColor = UIColor.randomColor.cgColor
+        dateEffectView.layer.borderColor = UIColor.randomColor.cgColor
+        statusEffectView.layer.borderWidth = 1
+        dateEffectView.layer.borderWidth = 1
     }
     
 }

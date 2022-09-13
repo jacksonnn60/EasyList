@@ -19,7 +19,7 @@ final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
         let menu = UIMenu(
             title: "Options",
             identifier: nil,
-            options: UIMenu.Options.destructive,
+            options: .destructive,
             children:
                 [
                     UIAction(title: "Add Challenge", image: .init(systemName: "plus"), state: .off) { _ in
@@ -29,7 +29,7 @@ final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
                         title: "Change image",
                         image: .init(systemName: "photo"),
                         identifier: nil,
-                        options: UIMenu.Options.singleSelection,
+                        options: .singleSelection,
                         children: [
                             UIAction(title: "Take photo", image: .init(systemName: "camera"), state: .off) { _ in
                                 self.takeImage()
@@ -37,7 +37,7 @@ final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
                             UIAction(title: "Open library", image: .init(systemName: "photo.on.rectangle.angled"), state: .off) { _ in
                                 self.pickImage()
                             },
-                            UIAction(title: "Delete image", image: .init(systemName: "trash"), state: .off) { _ in
+                            UIAction(title: "Delete image", image: .init(systemName: "trash"), attributes: baseView.imageView.image != nil ? .destructive : .disabled,  state: .off) { _ in
                                 self.viewModel?.input?.deleteImageMenuOptionDidChoose()
                             },
                         ]
@@ -69,6 +69,8 @@ final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
         
         setUpImage()
         
+        baseView.dateLabel.text = viewModel?.dayItem.date?.getString(formated: .dayCell)
+        
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = false
     }
@@ -84,20 +86,17 @@ final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
 private extension ToDoItemListViewController {
     func setUpOutput() {
         viewModel?.output = .init(
-            
             toDoItemsDidFetch: {
                 DispatchQueue.main.async {
                     self.baseView.tableView.reloadDataWithTransition(duration: 0.4)
                 }
             },
-            
             toDoStatusDidChange: { isFinished in
                 self.baseView.statusLabel.text = isFinished ? "Done" : "You have something to do"
             },
             imageDidDelete: {
                 self.setUpImage()
             },
-            
             errorDidAppear: { self.showError(message: $0) }
         )
     }
@@ -145,13 +144,15 @@ extension ToDoItemListViewController: ImagePickerDelegate {
     }
     
     func imagePicker(didPickImage image: UIImage) {
-        viewModel?.saveImage(image)
-        baseView.imageView.image = image
+        viewModel?.saveImage(image) {
+            self.setUpImage()
+        }
     }
     
     func imagePicker(didTakeImage image: UIImage) {
-        viewModel?.saveImage(image)
-        baseView.imageView.image = image
+        viewModel?.saveImage(image) {
+            self.setUpImage()
+        }
     }
 }
 

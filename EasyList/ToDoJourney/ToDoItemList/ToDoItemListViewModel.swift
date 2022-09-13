@@ -109,10 +109,10 @@ final class ToDoItemListViewModel {
         save { self.fetchToDoItems() }
     }
     
-    func saveImage(_ image: UIImage) {
+    func saveImage(_ image: UIImage, imageDidSaveBlock: VoidClosure? = nil) {
         dayItem.imageData = image.jpegData(compressionQuality: 1.0)
         
-        save()
+        save(successBlock: imageDidSaveBlock)
     }
     
     private func createToDoItem(with title: String) {

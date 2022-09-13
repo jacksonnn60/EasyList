@@ -111,10 +111,10 @@ final class ToDoStepDescriptionView: UIView, IdentifiableView  {
             make.width.equalTo(80)
             make.height.equalTo(34)
         }
-//        clockImageView.snp.makeConstraints { make in
-//            make.right.equalTo(saveButton.snp.left)
-//            make.centerY.equalTo(saveButton)
-//        }
+        //        clockImageView.snp.makeConstraints { make in
+        //            make.right.equalTo(saveButton.snp.left)
+        //            make.centerY.equalTo(saveButton)
+        //        }
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(toDoItemTitleLabel.snp.bottom).offset(8)
             make.left.equalTo(toDoItemTitleLabel)
@@ -126,5 +126,5 @@ final class ToDoStepDescriptionView: UIView, IdentifiableView  {
             make.left.equalTo(toDoItemTitleLabel)
             make.bottom.equalToSuperview().inset(32)
         }
-    
+    }
 }

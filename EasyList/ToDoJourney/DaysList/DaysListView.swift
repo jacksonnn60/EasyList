@@ -35,10 +35,9 @@ final class DaysListView: UIView {
     }(UIDatePicker())
     
     let tableView: UITableView = {
-//        $0.allowsSelection = true
-//        $0.separatorStyle = .none
-//        $0.showsVerticalScrollIndicator = false
-//        $0.sectionFooterHeight = 10
+        $0.allowsSelection = true
+        $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
         return $0
     }(UITableView())
     

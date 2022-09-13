@@ -13,6 +13,46 @@ final class ToDoItemListView: UIView {
     
     // MARK: - View components
     
+    private lazy var geometryView: UIView = {
+       return $0
+    }(UIHostingController(rootView: GeometryAnimationView()).view)
+    
+    private lazy var statusEffectView: UIVisualEffectView = {
+        $0.effect = UIBlurEffect(style: .systemUltraThinMaterial)
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 4
+        $0.contentView.addSubview(statusLabel)
+        statusLabel.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview().inset(4)
+        }
+        return $0
+    }(UIVisualEffectView())
+    
+    private lazy var dateEffectView: UIVisualEffectView = {
+        $0.effect = UIBlurEffect(style: .systemUltraThinMaterial)
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 4
+        $0.contentView.addSubview(dateLabel)
+        dateLabel.snp.makeConstraints { make in
+            make.right.left.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview().inset(4)
+        }
+        return $0
+    }(UIVisualEffectView())
+    
+    let statusLabel: UILabel = {
+        $0.font = .systemFont(ofSize: 15, weight: .semibold)
+        $0.textColor = .systemBackground
+        return $0
+    }(UILabel())
+    
+    let dateLabel: UILabel = {
+        $0.font = .systemFont(ofSize: 15, weight: .semibold)
+        $0.textColor = .systemBackground
+        return $0
+    }(UILabel())
+    
     private let scrollView: UIScrollView = {
         $0.showsVerticalScrollIndicator = false
         return $0
@@ -27,12 +67,6 @@ final class ToDoItemListView: UIView {
         $0.clipsToBounds = true
         return $0
     }(UIImageView())
-    
-    let statusLabel: UILabel = {
-        $0.textAlignment = .center
-        $0.font = .systemFont(ofSize: 12, weight: .regular)
-        return $0
-    }(UILabel())
     
     let tableView: UITableView = {
         $0.allowsSelection = true
@@ -65,8 +99,9 @@ final class ToDoItemListView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(imageView)
-        contentView.addSubview(statusLabel)
         contentView.addSubview(tableView)
+        imageView.addSubview(dateEffectView)
+        imageView.addSubview(statusEffectView)
     }
     
     private func anchorViews() {
@@ -81,34 +116,56 @@ final class ToDoItemListView: UIView {
             make.top.left.right.equalToSuperview()
             make.height.equalTo(snp.height).multipliedBy(0.3)
         }
-        statusLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(imageView)
-            make.top.equalTo(imageView.snp.bottom).offset(16)
-            make.left.right.equalToSuperview().inset(16)
+        dateEffectView.snp.makeConstraints { make in
+            make.right.top.equalToSuperview().inset(8)
+        }
+        statusEffectView.snp.makeConstraints { make in
+            make.right.bottom.equalToSuperview().inset(8)
         }
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(statusLabel.snp.bottom)
+            make.top.equalTo(imageView.snp.bottom)
             make.height.equalTo(1)
             make.left.right.bottom.equalToSuperview()
         }
     }
     
     func setImage(_ imageData: Data?) {
-        imageView.subviews.forEach { $0.removeFromSuperview() }
         
         if let imageData = imageData {
+            refreshImageViewSubviews()
+            
             imageView.image = UIImage(data: imageData)
         } else {
-            guard let geometryView = UIHostingController.init(rootView: GeometryAnimationView()).view else {
-                return
-            }
-            
             imageView.addSubview(geometryView)
             
             geometryView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
+            
+            colorImageViewSubviews()
         }
+        
+        imageView.bringSubviewToFront(dateEffectView)
+        imageView.bringSubviewToFront(statusEffectView)
+    }
+    
+    private func colorImageViewSubviews() {
+        statusLabel.textColor = .randomColor
+        dateLabel.textColor = .randomColor
+        statusEffectView.layer.borderColor = UIColor.randomColor.cgColor
+        dateEffectView.layer.borderColor = UIColor.randomColor.cgColor
+        statusEffectView.layer.borderWidth = 1
+        dateEffectView.layer.borderWidth = 1
+    }
+    
+    private func refreshImageViewSubviews() {
+        geometryView.removeFromSuperview()
+        statusLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+        statusLabel.textColor = .systemBackground
+        dateLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+        dateLabel.textColor = .systemBackground
+        statusEffectView.layer.borderWidth = 0
+        dateEffectView.layer.borderWidth = 0
     }
     
 }

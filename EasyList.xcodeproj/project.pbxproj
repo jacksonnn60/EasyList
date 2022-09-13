@@ -34,6 +34,7 @@
 		79BE392328C7386A00391247 /* EasyListDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79BE392128C7386A00391247 /* EasyListDataModel.xcdatamodeld */; };
 		79BE392B28C7666E00391247 /* ToDoItemListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BE392A28C7666E00391247 /* ToDoItemListViewModel.swift */; };
 		CD0AA4F5A087978DAE0DE08A /* Pods_EasyList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E776BF60DD0B5886BE572315 /* Pods_EasyList.framework */; };
+		EE5F470428D0AC98003F3E8C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F470328D0AC98003F3E8C /* Color.swift */; };
 		EE6F526428CF536D00F08BD3 /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526328CF536D00F08BD3 /* Closures.swift */; };
 		EE6F526628CF581E00F08BD3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526528CF581E00F08BD3 /* String.swift */; };
 		EE6F526828CF5AAE00F08BD3 /* Alert+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526728CF5AAE00F08BD3 /* Alert+Error.swift */; };
@@ -73,6 +74,7 @@
 		C922BF10112A14554AFAE93D /* Pods-EasyList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyList.debug.xcconfig"; path = "Target Support Files/Pods-EasyList/Pods-EasyList.debug.xcconfig"; sourceTree = "<group>"; };
 		DF0E743843C2370ABAE82328 /* Pods-EasyList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyList.release.xcconfig"; path = "Target Support Files/Pods-EasyList/Pods-EasyList.release.xcconfig"; sourceTree = "<group>"; };
 		E776BF60DD0B5886BE572315 /* Pods_EasyList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE5F470328D0AC98003F3E8C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		EE6F526328CF536D00F08BD3 /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
 		EE6F526528CF581E00F08BD3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		EE6F526728CF5AAE00F08BD3 /* Alert+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Error.swift"; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				7983893728BF859C00749176 /* DateFormats.swift */,
 				EE6F526528CF581E00F08BD3 /* String.swift */,
 				EE6F526928CF5B6700F08BD3 /* TableView.swift */,
+				EE5F470328D0AC98003F3E8C /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				7983893528BF827A00749176 /* IdentifiableView.swift in Sources */,
 				79BE38DA28C63C3600391247 /* DaysListViewModel.swift in Sources */,
 				7983893828BF859C00749176 /* DateFormats.swift in Sources */,
+				EE5F470428D0AC98003F3E8C /* Color.swift in Sources */,
 				7983893C28BF875C00749176 /* ToDoItemListView.swift in Sources */,
 				EE6F526C28CF701300F08BD3 /* GeometryAnimationView.swift in Sources */,
 				79BE392B28C7666E00391247 /* ToDoItemListViewModel.swift in Sources */,
