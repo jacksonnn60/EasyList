@@ -11,16 +11,11 @@ final class ToDoStepDescriptionViewController: BaseViewController<ToDoStepDescri
     
     var viewModel: ToDoStepDescriptionViewModel?
     
-    override var title: String? {
-        didSet {
-            baseView.toDoItemTitleLabel.text = title
-        }
-    }
-    
     // MARK: - Lifecycle
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        baseView.toDoItemTitleLabel.text = viewModel?.toDoItem.title
         baseView.creationDateLabel.text = viewModel?.toDoItem.creationDate?.getString(formated: .toDoStepDescription)
     }
     

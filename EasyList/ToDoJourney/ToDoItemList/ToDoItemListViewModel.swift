@@ -14,11 +14,13 @@ final class ToDoItemListViewModel {
     struct Output {
         var toDoItemsDidFetch: VoidClosure
         var toDoStatusDidChange: Closure<Bool>
+        var imageDidDelete: VoidClosure
         var errorDidAppear: Closure<String>
     }
     
     struct Input {
         var viewWillAppear: VoidClosure
+        var deleteImageMenuOptionDidChoose: VoidClosure
         var checkBoxDidToggle: Closure<(IndexPath, Bool)>
         var cellDidTap: Closure<(UIViewController, IndexPath)>
         var removeCellDidHandle: Closure<IndexPath>
@@ -59,6 +61,10 @@ final class ToDoItemListViewModel {
     func setUpInput() {
         input = .init(
             viewWillAppear: { self.fetchToDoItems() },
+            deleteImageMenuOptionDidChoose: {
+                self.dayItem.imageData = nil
+                self.save(successBlock: self.output?.imageDidDelete)
+            },
             checkBoxDidToggle: { self.checkBoxDidToggle(for: $0, toggleResult: $1) },
             cellDidTap: {
                 self.configuration.router.toDoItemCellDidTap($0, self.toDoItems[$1.item])

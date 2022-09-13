@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftUI
 
 final class ToDoItemListView: UIView {
     
@@ -23,6 +24,7 @@ final class ToDoItemListView: UIView {
     
     let imageView: UIImageView = {
         $0.isUserInteractionEnabled = true
+        $0.clipsToBounds = true
         return $0
     }(UIImageView())
     
@@ -88,6 +90,24 @@ final class ToDoItemListView: UIView {
             make.top.equalTo(statusLabel.snp.bottom)
             make.height.equalTo(1)
             make.left.right.bottom.equalToSuperview()
+        }
+    }
+    
+    func setImage(_ imageData: Data?) {
+        imageView.subviews.forEach { $0.removeFromSuperview() }
+        
+        if let imageData = imageData {
+            imageView.image = UIImage(data: imageData)
+        } else {
+            guard let geometryView = UIHostingController.init(rootView: GeometryAnimationView()).view else {
+                return
+            }
+            
+            imageView.addSubview(geometryView)
+            
+            geometryView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
         }
     }
     

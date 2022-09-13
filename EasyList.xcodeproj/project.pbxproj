@@ -38,6 +38,7 @@
 		EE6F526628CF581E00F08BD3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526528CF581E00F08BD3 /* String.swift */; };
 		EE6F526828CF5AAE00F08BD3 /* Alert+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526728CF5AAE00F08BD3 /* Alert+Error.swift */; };
 		EE6F526A28CF5B6700F08BD3 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526928CF5B6700F08BD3 /* TableView.swift */; };
+		EE6F526C28CF701300F08BD3 /* GeometryAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526B28CF701300F08BD3 /* GeometryAnimationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		EE6F526528CF581E00F08BD3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		EE6F526728CF5AAE00F08BD3 /* Alert+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Error.swift"; sourceTree = "<group>"; };
 		EE6F526928CF5B6700F08BD3 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		EE6F526B28CF701300F08BD3 /* GeometryAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryAnimationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			children = (
 				EE6F526328CF536D00F08BD3 /* Closures.swift */,
 				791F86C528C8CB3F00C4EB07 /* ImagePicker.swift */,
+				EE6F526B28CF701300F08BD3 /* GeometryAnimationView.swift */,
 				791F86D328CA283F00C4EB07 /* ToDoJourney */,
 				79BE38D828C63A5500391247 /* Extensions */,
 				7983892C28BF795300749176 /* App */,
@@ -382,6 +385,7 @@
 				79BE38DA28C63C3600391247 /* DaysListViewModel.swift in Sources */,
 				7983893828BF859C00749176 /* DateFormats.swift in Sources */,
 				7983893C28BF875C00749176 /* ToDoItemListView.swift in Sources */,
+				EE6F526C28CF701300F08BD3 /* GeometryAnimationView.swift in Sources */,
 				79BE392B28C7666E00391247 /* ToDoItemListViewModel.swift in Sources */,
 				798DC8DA28BFB1F7006CFB98 /* CheckBox.swift in Sources */,
 				791F86CC28CA150A00C4EB07 /* ToDoJourney.swift in Sources */,

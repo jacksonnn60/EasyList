@@ -106,8 +106,7 @@ extension DaysListViewController: UITableViewDelegate {
         .init(
             actions:
                 [
-                    UIContextualAction(style: .destructive, title: "Remove") { action, view, closure in
-                        action.backgroundColor = .secondarySystemFill
+                    UIContextualAction(style: .destructive, title: "Delete") { action, view, closure in
                         self.viewModel?.input?.removeCellDidHandle(indexPath)
                     }
                 ]
@@ -137,7 +136,7 @@ extension DaysListViewController: UITableViewDelegate {
 
 extension DaysListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
+        
         guard indexPath.item < viewModel?.dayItems?.count ?? 0,
               let cell = tableView.dequeueReusableCell(withIdentifier: DayListCell.viewIdentifier, for: indexPath) as? DayListCell,
               let dayItem = viewModel?.dayItems?[indexPath.item] else {
@@ -145,18 +144,19 @@ extension DaysListViewController: UITableViewDataSource {
             return .init()
         }
         
-        if let imageData = dayItem.imageData {
-            cell.dayImageView.image = UIImage(data: imageData)
-        } else {
-            cell.dayImageView.backgroundColor =
-            [
-                .systemBlue,
-                .systemCyan,
-                .systemPink,
-                .systemTeal
-                
-            ].shuffled().last
-        }
+        //            cell.dayImageView.image = UIImage(data: imageData)
+        cell.setImage(dayItem.imageData)
+        //        } else {
+        //            cell.dayImageView.backgroundColor =
+        //            [
+        //                .systemBlue,
+        //                .systemCyan,
+        //                .systemPink,
+        //                .systemTeal
+        //
+        //            ].shuffled().last
+        
+        //        }
         
         cell.dateLabel.text = dayItem.date?.getString(formated: .dayCell)
         cell.statusLabel.text = dayItem.isFinished ? "Done" : "You have something to do"

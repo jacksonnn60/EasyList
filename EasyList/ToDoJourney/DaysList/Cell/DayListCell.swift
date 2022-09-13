@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftUI
 
 final class DayListCell: UITableViewCell, IdentifiableView {
     
@@ -69,9 +70,11 @@ final class DayListCell: UITableViewCell, IdentifiableView {
     override func prepareForReuse() {
         super.prepareForReuse()
         dayImageView.image = nil
+        dayImageView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     private func configureView() {
+        contentView.clipsToBounds = true
         backgroundColor = .systemBackground
     }
     
@@ -93,6 +96,32 @@ final class DayListCell: UITableViewCell, IdentifiableView {
         }
         statusEffectView.snp.makeConstraints { make in
             make.top.right.equalToSuperview().inset(8)
+        }
+    }
+    
+    func setImage(_ imageData: Data?) {
+        if let imageData = imageData {
+            dayImageView.image = UIImage(data: imageData)
+        } else {
+            guard let geometryView = UIHostingController.init(rootView: GeometryAnimationView()).view else {
+                return
+            }
+            
+            dayImageView.addSubview(geometryView)
+            
+            geometryView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            
+            statusLabel.textColor = [UIColor.systemBlue, UIColor.red, UIColor.systemIndigo].shuffled().first
+            dateLabel.textColor = [UIColor.systemBlue, UIColor.red, UIColor.systemIndigo].shuffled().first
+            statusEffectView.layer.borderColor = [UIColor.systemBlue, UIColor.red, UIColor.systemIndigo].shuffled().first?.cgColor
+            statusEffectView.layer.borderWidth = 1
+            dateEffectView.layer.borderColor = [UIColor.systemBlue, UIColor.red, UIColor.systemIndigo].shuffled().first?.cgColor
+            dateEffectView.layer.borderWidth = 1
+            
+            bringSubviewToFront(statusEffectView)
+            bringSubviewToFront(dateEffectView)
         }
     }
     

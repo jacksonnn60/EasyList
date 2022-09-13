@@ -37,6 +37,9 @@ final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
                             UIAction(title: "Open library", image: .init(systemName: "photo.on.rectangle.angled"), state: .off) { _ in
                                 self.pickImage()
                             },
+                            UIAction(title: "Delete image", image: .init(systemName: "trash"), state: .off) { _ in
+                                self.viewModel?.input?.deleteImageMenuOptionDidChoose()
+                            },
                         ]
                     ),
                     UIAction(title: "Delete day", image: .init(systemName: "trash"), attributes: .destructive, state: .off) { _ in
@@ -90,6 +93,9 @@ private extension ToDoItemListViewController {
             
             toDoStatusDidChange: { isFinished in
                 self.baseView.statusLabel.text = isFinished ? "Done" : "You have something to do"
+            },
+            imageDidDelete: {
+                self.setUpImage()
             },
             
             errorDidAppear: { self.showError(message: $0) }
@@ -159,11 +165,7 @@ private extension ToDoItemListViewController {
     }
     
     func setUpImage() {
-        if let imageData = viewModel?.dayItem.imageData {
-            self.baseView.imageView.image = UIImage(data: imageData)
-        } else {
-            baseView.imageView.backgroundColor = .systemGray6
-        }
+        baseView.setImage(viewModel?.dayItem.imageData)
     }
 }
 
