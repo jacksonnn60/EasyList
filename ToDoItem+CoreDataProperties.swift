@@ -2,7 +2,7 @@
 //  ToDoItem+CoreDataProperties.swift
 //  
 //
-//  Created by Basistyi, Yevhen on 07/09/2022.
+//  Created by Jackson  on 13/09/2022.
 //
 //
 
@@ -16,9 +16,10 @@ extension ToDoItem {
         return NSFetchRequest<ToDoItem>(entityName: "ToDoItem")
     }
 
+    @NSManaged public var creationDate: Date?
     @NSManaged public var date: Date?
     @NSManaged public var isFinished: Bool
     @NSManaged public var title: String?
-    @NSManaged public var creationDate: Date?
+    @NSManaged public var stepDescription: String?
 
 }

@@ -123,6 +123,7 @@ final class ToDoItemListViewModel {
         let item = ToDoItem(context: managedContext)
         item.title = title
         item.date = dayItem.date
+        item.stepDescription = ""
         item.creationDate = Date()
         item.isFinished = false
         

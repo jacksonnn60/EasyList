@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class ToDoStepDescriptionView: UIView, IdentifiableView  {
-    
+        
     private let scrollView: UIScrollView = {
         $0.showsVerticalScrollIndicator = false
         return $0
@@ -19,19 +19,19 @@ final class ToDoStepDescriptionView: UIView, IdentifiableView  {
         return $0
     }(UIView())
     
-    private let clockImageView: UIImageView = {
-        let configuration = UIImage.SymbolConfiguration.init(pointSize: 11, weight: .regular, scale: .default)
-        $0.image = UIImage(systemName: "clock", withConfiguration: configuration)
-        $0.tintColor = .secondaryLabel
-        return $0
-    }(UIImageView())
+//    private let clockImageView: UIImageView = {
+//        let configuration = UIImage.SymbolConfiguration.init(pointSize: 11, weight: .regular, scale: .default)
+//        $0.image = UIImage(systemName: "clock", withConfiguration: configuration)
+//        $0.tintColor = .secondaryLabel
+//        return $0
+//    }(UIImageView())
     
-    let creationDateLabel: UILabel = {
-        $0.text = "--"
-        $0.font = .systemFont(ofSize: 11, weight: .regular)
-        $0.textColor = .secondaryLabel
-        return $0
-    }(UILabel())
+//    let creationDateLabel: UILabel = {
+//        $0.text = "--"
+//        $0.font = .systemFont(ofSize: 11, weight: .regular)
+//        $0.textColor = .secondaryLabel
+//        return $0
+//    }(UILabel())
     
     let toDoItemTitleLabel: UILabel = {
         $0.text = "To Do Item Label"
@@ -47,18 +47,19 @@ final class ToDoStepDescriptionView: UIView, IdentifiableView  {
         return $0
     }(UILabel())
     
-    let descriptionLabel: UILabel = {
-        $0.text = """
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publ ishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            """
-        $0.numberOfLines = 0
+    let descriptionTextView: UITextView = {
+        $0.isUserInteractionEnabled = false
         $0.font = .systemFont(ofSize: 15, weight: .regular)
         $0.textAlignment = .justified
         return $0
-    }(UILabel())
+    }(UITextView())
+    
+    let editButton: UIButton = {
+        $0.setTitle("Edit", for: .normal)
+        $0.backgroundColor = .systemBlue
+        $0.layer.cornerRadius = 12
+        return $0
+    }(UIButton())
     
     // MARK: - Init
     
@@ -84,10 +85,11 @@ final class ToDoStepDescriptionView: UIView, IdentifiableView  {
         scrollView.addSubview(contentView)
         
         contentView.addSubview(toDoItemTitleLabel)
-        contentView.addSubview(creationDateLabel)
-        contentView.addSubview(clockImageView)
+//        contentView.addSubview(creationDateLabel)
+        contentView.addSubview(editButton)
+//        contentView.addSubview(clockImageView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(descriptionTextView)
     }
     
     private func anchorViews() {
@@ -101,25 +103,28 @@ final class ToDoStepDescriptionView: UIView, IdentifiableView  {
         toDoItemTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(32)
             make.left.equalToSuperview().inset(16)
-            make.right.equalTo(clockImageView.snp.left).inset(8)
+            make.right.equalTo(editButton.snp.left).inset(8)
         }
-        creationDateLabel.snp.makeConstraints { make in
+        editButton.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(16)
             make.centerY.equalTo(toDoItemTitleLabel)
+            make.width.equalTo(80)
+            make.height.equalTo(34)
         }
-        clockImageView.snp.makeConstraints { make in
-            make.right.equalTo(creationDateLabel.snp.left)
-            make.centerY.equalTo(creationDateLabel)
-        }
+//        clockImageView.snp.makeConstraints { make in
+//            make.right.equalTo(saveButton.snp.left)
+//            make.centerY.equalTo(saveButton)
+//        }
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(toDoItemTitleLabel.snp.bottom).offset(8)
             make.left.equalTo(toDoItemTitleLabel)
         }
-        descriptionLabel.snp.makeConstraints { make in
+        descriptionTextView.snp.makeConstraints { make in
+            make.height.equalTo(0)
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
-            make.right.left.equalToSuperview().inset(16)
+            make.right.equalToSuperview().inset(16)
+            make.left.equalTo(toDoItemTitleLabel)
             make.bottom.equalToSuperview().inset(32)
         }
-    }
     
 }
