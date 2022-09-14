@@ -6,43 +6,27 @@
 //
 
 import SwiftUI
+import Resolver
 
-struct GeometryAnimationView: View {
+struct AppStyleAnimatedView: View {
     
-    let systemImages =
-    [
-        "square",
-        "circle",
-        "triangle"
-    ]
+    @Injected var generalSettings: SettingsJourney.GeneralSettings
     
-    var mainColors: [Color] =
-    [
-        .teal,
-        .green,
-        .cyan,
-        .yellow,
-        .red,
-        .blue,
-        .pink,
-        .indigo
-    ]
-    
-    var geometriesCount: Int = 10
+    var elementsCount: Int = 10
     
     @State var animate = false
     
     var body: some View {
         VStack {
             
-            ForEach(0..<geometriesCount) { _ in
-                Image(systemName: systemImages.shuffled().first ?? "square")
+            ForEach(0..<elementsCount) { _ in
+                Image(systemName: generalSettings.appStyle.options.shuffled().first ?? "square")
                     .resizable()
                     .frame(
                         width: 150, height: 150
                     )
                     .foregroundColor(
-                        mainColors.shuffled().first ?? .green
+                        Color(uiColor: generalSettings.colourStyle.options.shuffled().first ?? .green)
                     )
                     .opacity(
                         animate ? Double.random(in: 0.5..<1.0) : 1.0
@@ -56,11 +40,22 @@ struct GeometryAnimationView: View {
                         .init(rotationAngle: animate ? Double.random(in: 0.0..<360) : 0.0 )
                     )
 //                    .animation(.linear(duration: 3).repeatForever(autoreverses: true))
-                    .onAppear {
-//                        withAnimation {
-                            animate = true
+//                    .onAppear {
+////                        withAnimation {
+////                            animate = true
+////                        }
+//                        withAnimation(.linear(duration: 1).repeatForever()) {
+//                            animate = true
 //                        }
-                    }
+//                    }
+            }
+        }
+        .onAppear {
+//                        withAnimation {
+//                            animate = true
+//                        }
+            withAnimation(.linear(duration: 1).repeatForever()) {
+                animate = true
             }
         }
         .frame(
@@ -77,6 +72,6 @@ struct GeometryAnimationView: View {
 
 struct GeometryAnimationViewPreviews: PreviewProvider {
     static var previews: some View {
-        GeometryAnimationView()
+        AppStyleAnimatedView()
     }
 }

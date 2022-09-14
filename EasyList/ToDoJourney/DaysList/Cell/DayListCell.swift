@@ -15,7 +15,7 @@ final class DayListCell: UITableViewCell, IdentifiableView {
     
     private lazy var geometryView: UIView = {
        return $0
-    }(UIHostingController(rootView: GeometryAnimationView()).view)
+    }(UIHostingController(rootView: AppStyleAnimatedView()).view)
     
     private lazy var statusEffectView: UIVisualEffectView = {
         $0.effect = UIBlurEffect(style: .systemUltraThinMaterial)

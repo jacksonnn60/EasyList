@@ -7,4 +7,4 @@
 
 import Foundation
 
-class ToDoJourney { }
+class ToDoJourney {}

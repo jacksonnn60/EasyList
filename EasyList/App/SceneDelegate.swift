@@ -18,9 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         registerServices()
         
+        let controller = TabBarController()
+         
+        controller.viewControllers =
+        [
+            UINavigationController(rootViewController: ToDoJourney.DaysList.build()),
+            UINavigationController(rootViewController: SettingsJourney.SettingsList.build())
+        ]
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
-        window?.rootViewController = UINavigationController(rootViewController: ToDoJourney.DaysList.build())
+        window?.rootViewController = controller
         window?.makeKeyAndVisible()
     }
     
@@ -28,6 +36,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         Resolver.register { ToDoJourney.DaysList.Configuration() }
         Resolver.register { ToDoJourney.ToDoItemList.Configuration() }
         Resolver.register { ToDoJourney.ToDoStepDescription.Configuration() }
+        Resolver.register { SettingsJourney.SettingsList.Configuration() }
+        
+        Resolver.register { SettingsJourney.GeneralSettings() }.scope(.shared)
         
         Resolver.register { (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext }.scope(.shared)
     }

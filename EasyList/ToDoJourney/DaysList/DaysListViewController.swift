@@ -31,11 +31,7 @@ final class DaysListViewController: BaseViewController<DaysListView> {
         viewModel?.input?.viewWillAppear()
         
         navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func configureNavigationBarItems() {

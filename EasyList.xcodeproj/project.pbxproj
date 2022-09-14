@@ -35,11 +35,18 @@
 		79BE392B28C7666E00391247 /* ToDoItemListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BE392A28C7666E00391247 /* ToDoItemListViewModel.swift */; };
 		CD0AA4F5A087978DAE0DE08A /* Pods_EasyList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E776BF60DD0B5886BE572315 /* Pods_EasyList.framework */; };
 		EE5F470428D0AC98003F3E8C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F470328D0AC98003F3E8C /* Color.swift */; };
+		EE5F470B28D1E6DA003F3E8C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F470A28D1E6DA003F3E8C /* TabBarController.swift */; };
+		EE5F470E28D1E768003F3E8C /* SettingsJourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F470D28D1E768003F3E8C /* SettingsJourney.swift */; };
+		EE5F471128D1E7D1003F3E8C /* SettingsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F471028D1E7D1003F3E8C /* SettingsListViewController.swift */; };
+		EE5F471328D1E7EA003F3E8C /* SettingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F471228D1E7EA003F3E8C /* SettingsListView.swift */; };
+		EE5F471528D1E81D003F3E8C /* SettingsListConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F471428D1E81D003F3E8C /* SettingsListConfiguration.swift */; };
+		EE5F471728D1F0E1003F3E8C /* SettingsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F471628D1F0E1003F3E8C /* SettingsListViewModel.swift */; };
+		EE5F471928D205E7003F3E8C /* SettingsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5F471828D205E7003F3E8C /* SettingsListCell.swift */; };
 		EE6F526428CF536D00F08BD3 /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526328CF536D00F08BD3 /* Closures.swift */; };
 		EE6F526628CF581E00F08BD3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526528CF581E00F08BD3 /* String.swift */; };
 		EE6F526828CF5AAE00F08BD3 /* Alert+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526728CF5AAE00F08BD3 /* Alert+Error.swift */; };
 		EE6F526A28CF5B6700F08BD3 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526928CF5B6700F08BD3 /* TableView.swift */; };
-		EE6F526C28CF701300F08BD3 /* GeometryAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526B28CF701300F08BD3 /* GeometryAnimationView.swift */; };
+		EE6F526C28CF701300F08BD3 /* AppStyleAnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6F526B28CF701300F08BD3 /* AppStyleAnimatedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,11 +82,18 @@
 		DF0E743843C2370ABAE82328 /* Pods-EasyList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyList.release.xcconfig"; path = "Target Support Files/Pods-EasyList/Pods-EasyList.release.xcconfig"; sourceTree = "<group>"; };
 		E776BF60DD0B5886BE572315 /* Pods_EasyList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EasyList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE5F470328D0AC98003F3E8C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		EE5F470A28D1E6DA003F3E8C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		EE5F470D28D1E768003F3E8C /* SettingsJourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsJourney.swift; sourceTree = "<group>"; };
+		EE5F471028D1E7D1003F3E8C /* SettingsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListViewController.swift; sourceTree = "<group>"; };
+		EE5F471228D1E7EA003F3E8C /* SettingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListView.swift; sourceTree = "<group>"; };
+		EE5F471428D1E81D003F3E8C /* SettingsListConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListConfiguration.swift; sourceTree = "<group>"; };
+		EE5F471628D1F0E1003F3E8C /* SettingsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListViewModel.swift; sourceTree = "<group>"; };
+		EE5F471828D205E7003F3E8C /* SettingsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListCell.swift; sourceTree = "<group>"; };
 		EE6F526328CF536D00F08BD3 /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
 		EE6F526528CF581E00F08BD3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		EE6F526728CF5AAE00F08BD3 /* Alert+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alert+Error.swift"; sourceTree = "<group>"; };
 		EE6F526928CF5B6700F08BD3 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
-		EE6F526B28CF701300F08BD3 /* GeometryAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryAnimationView.swift; sourceTree = "<group>"; };
+		EE6F526B28CF701300F08BD3 /* AppStyleAnimatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyleAnimatedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,9 +168,11 @@
 		7983891728BF790F00749176 /* EasyList */ = {
 			isa = PBXGroup;
 			children = (
+				EE5F470A28D1E6DA003F3E8C /* TabBarController.swift */,
 				EE6F526328CF536D00F08BD3 /* Closures.swift */,
 				791F86C528C8CB3F00C4EB07 /* ImagePicker.swift */,
-				EE6F526B28CF701300F08BD3 /* GeometryAnimationView.swift */,
+				EE6F526B28CF701300F08BD3 /* AppStyleAnimatedView.swift */,
+				EE5F470C28D1E756003F3E8C /* SettingsJourney */,
 				791F86D328CA283F00C4EB07 /* ToDoJourney */,
 				79BE38D828C63A5500391247 /* Extensions */,
 				7983892C28BF795300749176 /* App */,
@@ -248,6 +264,27 @@
 				EE5F470328D0AC98003F3E8C /* Color.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EE5F470C28D1E756003F3E8C /* SettingsJourney */ = {
+			isa = PBXGroup;
+			children = (
+				EE5F470D28D1E768003F3E8C /* SettingsJourney.swift */,
+				EE5F470F28D1E79B003F3E8C /* SettingsList */,
+			);
+			path = SettingsJourney;
+			sourceTree = "<group>";
+		};
+		EE5F470F28D1E79B003F3E8C /* SettingsList */ = {
+			isa = PBXGroup;
+			children = (
+				EE5F471828D205E7003F3E8C /* SettingsListCell.swift */,
+				EE5F471028D1E7D1003F3E8C /* SettingsListViewController.swift */,
+				EE5F471628D1F0E1003F3E8C /* SettingsListViewModel.swift */,
+				EE5F471228D1E7EA003F3E8C /* SettingsListView.swift */,
+				EE5F471428D1E81D003F3E8C /* SettingsListConfiguration.swift */,
+			);
+			path = SettingsList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,16 +406,21 @@
 				796E89D128C0B19800622CB3 /* ToDoStepDescriptionViewController.swift in Sources */,
 				791F86CE28CA151F00C4EB07 /* DaysListConfiguration.swift in Sources */,
 				791F86C828C8DA0500C4EB07 /* ToDoStepDescriptionViewModel.swift in Sources */,
+				EE5F471328D1E7EA003F3E8C /* SettingsListView.swift in Sources */,
 				7983893328BF7F0F00749176 /* DayListCell.swift in Sources */,
 				791F86D028CA15E100C4EB07 /* ToDoItemConfiguration.swift in Sources */,
 				EE6F526428CF536D00F08BD3 /* Closures.swift in Sources */,
 				7983893028BF79CC00749176 /* BaseViewController.swift in Sources */,
+				EE5F471528D1E81D003F3E8C /* SettingsListConfiguration.swift in Sources */,
 				791F86D228CA252E00C4EB07 /* ToDoStepConfiguration.swift in Sources */,
 				7983891D28BF790F00749176 /* DaysListViewController.swift in Sources */,
 				79BE392328C7386A00391247 /* EasyListDataModel.xcdatamodeld in Sources */,
 				791F86C628C8CB3F00C4EB07 /* ImagePicker.swift in Sources */,
+				EE5F470E28D1E768003F3E8C /* SettingsJourney.swift in Sources */,
+				EE5F471928D205E7003F3E8C /* SettingsListCell.swift in Sources */,
 				7983893E28BF88A300749176 /* ToDoCell.swift in Sources */,
 				EE6F526628CF581E00F08BD3 /* String.swift in Sources */,
+				EE5F470B28D1E6DA003F3E8C /* TabBarController.swift in Sources */,
 				7983892E28BF79BB00749176 /* DaysListView.swift in Sources */,
 				7983891928BF790F00749176 /* AppDelegate.swift in Sources */,
 				EE6F526A28CF5B6700F08BD3 /* TableView.swift in Sources */,
@@ -389,7 +431,9 @@
 				7983893828BF859C00749176 /* DateFormats.swift in Sources */,
 				EE5F470428D0AC98003F3E8C /* Color.swift in Sources */,
 				7983893C28BF875C00749176 /* ToDoItemListView.swift in Sources */,
-				EE6F526C28CF701300F08BD3 /* GeometryAnimationView.swift in Sources */,
+				EE6F526C28CF701300F08BD3 /* AppStyleAnimatedView.swift in Sources */,
+				EE5F471128D1E7D1003F3E8C /* SettingsListViewController.swift in Sources */,
+				EE5F471728D1F0E1003F3E8C /* SettingsListViewModel.swift in Sources */,
 				79BE392B28C7666E00391247 /* ToDoItemListViewModel.swift in Sources */,
 				798DC8DA28BFB1F7006CFB98 /* CheckBox.swift in Sources */,
 				791F86CC28CA150A00C4EB07 /* ToDoJourney.swift in Sources */,
