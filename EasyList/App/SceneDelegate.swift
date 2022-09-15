@@ -7,6 +7,7 @@
 
 import UIKit
 import Resolver
+import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,30 +19,60 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         registerServices()
         
-        let controller = TabBarController()
-         
-        controller.viewControllers =
-        [
-            UINavigationController(rootViewController: ToDoJourney.DaysList.build()),
-            UINavigationController(rootViewController: SettingsJourney.SettingsList.build())
-        ]
-        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
-        window?.rootViewController = controller
-        window?.makeKeyAndVisible()
+        
+        App.start(from: window ?? .init())
+        
     }
     
+}
+
+private extension SceneDelegate {
     func registerServices() {
         Resolver.register { ToDoJourney.DaysList.Configuration() }
         Resolver.register { ToDoJourney.ToDoItemList.Configuration() }
         Resolver.register { ToDoJourney.ToDoStepDescription.Configuration() }
         Resolver.register { SettingsJourney.SettingsList.Configuration() }
         
-        Resolver.register { SettingsJourney.GeneralSettings() }.scope(.shared)
+        guard let managedContext = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
+            return
+        }
         
-        Resolver.register { (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext }.scope(.shared)
+        Resolver.register { managedContext }.scope(.shared)
+
+        registerSettings(managedContext)
     }
-
+    
+    func registerSettings(_ managedContext: NSManagedObjectContext) {
+        do {
+            if let settings = try managedContext.fetch(GeneralSettingsOptions.fetchRequest()).first {
+                
+                let generalSettings = SettingsJourney.GeneralSettings()
+                generalSettings.appStyle = SettingsJourney.GeneralSettings.Styles.AppStyle(rawValue: Int(settings.appStyle)) ?? .geometry
+                generalSettings.colourStyle = SettingsJourney.GeneralSettings.Styles.ColourStyle(rawValue: Int(settings.colourStyle)) ?? .happy
+                
+                Resolver.register { generalSettings }.scope(.shared)
+                
+            } else {
+                throw "No settings in Container."
+            }
+                            
+        } catch let error {
+            let newSettings = SettingsJourney.GeneralSettings()
+            
+            Resolver.register { newSettings }.scope(.shared)
+            
+            let generalSettingsOptions = GeneralSettingsOptions(context: managedContext)
+            generalSettingsOptions.appStyle = Int16(newSettings.appStyle.rawValue)
+            generalSettingsOptions.colourStyle = Int16(newSettings.colourStyle.rawValue)
+            do {
+                try managedContext.save()
+            } catch let error {
+                print(error)
+            }
+            
+            print("Error: \(error.localizedDescription)")
+        }
+    }
 }
-

@@ -37,7 +37,7 @@ final class ToDoItemListViewController: BaseViewController<ToDoItemListView> {
                             UIAction(title: "Open library", image: .init(systemName: "photo.on.rectangle.angled"), state: .off) { _ in
                                 self.pickImage()
                             },
-                            UIAction(title: "Delete image", image: .init(systemName: "trash"), attributes: baseView.imageView.image != nil ? .destructive : .disabled,  state: .off) { _ in
+                            UIAction(title: "Delete image", image: .init(systemName: "trash"),  state: .off) { _ in
                                 self.viewModel?.input?.deleteImageMenuOptionDidChoose()
                             },
                         ]

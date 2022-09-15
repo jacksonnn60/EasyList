@@ -6,16 +6,37 @@
 //
 
 import UIKit
+import Resolver
 
 class SettingsListView: UIView {
     
+    @OptionalInjected private var generalSettings: SettingsJourney.GeneralSettings?
+    
+    var pickerDidHide: VoidClosure?
+    
+    private var color: UIColor? {
+        generalSettings?.colourStyle.options.shuffled().first
+    }
+    
+    // MARK: - View components
+    
+    lazy var pickerToolbar: UIToolbar = {
+        $0.backgroundColor = (color ?? .systemBlue).withAlphaComponent(0.3)
+        $0.tintColor = color ?? .systemBlue
+        $0.items =
+        [
+            .flexibleSpace(),
+            .init(title: "Done", style: .done, target: nil, action: #selector(doneBarButtonDidTap(_:)))
+        ]
+        return $0
+    }(UIToolbar())
+    
     lazy var pickerView: UIPickerView = {
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = (color ?? .systemBlue).withAlphaComponent(0.3)
         return $0
     }(UIPickerView())
     
     let tableView: UITableView = {
-//        $0.allowsSelection = false
         return $0
     }(UITableView(frame: .zero, style: .insetGrouped))
     
@@ -50,13 +71,26 @@ class SettingsListView: UIView {
     
     func showPicker() {
         addSubview(pickerView)
+        addSubview(pickerToolbar)
+        
         pickerView.snp.makeConstraints { make in
             make.bottom.left.right.equalToSuperview()
+        }
+        pickerToolbar.snp.makeConstraints { make in
+            make.bottom.equalTo(pickerView.snp.top)
+            make.left.right.equalToSuperview()
         }
     }
     
     func hidePicker() {
+        pickerToolbar.removeFromSuperview()
         pickerView.removeFromSuperview()
+    }
+    
+    
+    @objc private func doneBarButtonDidTap(_ toolBarItem: UIBarButtonItem) {
+        hidePicker()
+        pickerDidHide?()
     }
     
 }

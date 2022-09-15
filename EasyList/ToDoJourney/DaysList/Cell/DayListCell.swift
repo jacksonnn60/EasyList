@@ -8,14 +8,17 @@
 import UIKit
 import SnapKit
 import SwiftUI
+import Resolver
 
 final class DayListCell: UITableViewCell, IdentifiableView {
     
+    @OptionalInjected private var generalSettings: SettingsJourney.GeneralSettings?
+    
     // MARK: - View components
     
-    private lazy var geometryView: UIView = {
-       return $0
-    }(UIHostingController(rootView: AppStyleAnimatedView()).view)
+//    private lazy var animationView: UIView = {
+//       return $0
+//    }(UIHostingController(rootView: AppStyleAnimatedView(generalSettings: generalSettings ?? .init())).view)
     
     private lazy var statusEffectView: UIVisualEffectView = {
         $0.effect = UIBlurEffect(style: .systemUltraThinMaterial)
@@ -109,9 +112,11 @@ final class DayListCell: UITableViewCell, IdentifiableView {
         if let imageData = imageData {
             dayImageView.image = UIImage(data: imageData)
         } else {
-            dayImageView.addSubview(geometryView)
+            let animationView = UIHostingController(rootView: AppStyleAnimatedView(generalSettings: generalSettings ?? .init())).view
             
-            geometryView.snp.makeConstraints { make in
+            dayImageView.addSubview(animationView ?? .init())
+            
+            animationView?.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }
             
@@ -132,10 +137,10 @@ final class DayListCell: UITableViewCell, IdentifiableView {
     }
     
     private func colorImageViewSubviews() {
-        statusLabel.textColor = .randomColor
-        dateLabel.textColor = .randomColor
-        statusEffectView.layer.borderColor = UIColor.randomColor.cgColor
-        dateEffectView.layer.borderColor = UIColor.randomColor.cgColor
+        statusLabel.textColor = generalSettings?.colourStyle.options.shuffled().first
+        dateLabel.textColor = generalSettings?.colourStyle.options.shuffled().first
+        statusEffectView.layer.borderColor = generalSettings?.colourStyle.options.shuffled().first?.cgColor
+        dateEffectView.layer.borderColor = generalSettings?.colourStyle.options.shuffled().first?.cgColor
         statusEffectView.layer.borderWidth = 1
         dateEffectView.layer.borderWidth = 1
     }

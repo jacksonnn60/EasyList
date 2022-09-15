@@ -18,6 +18,8 @@ final class SettingsListViewController: BaseViewController<SettingsListView> {
         super.viewDidLoad()
         title = "Settings"
         
+        setUpOutput()
+        
         baseView.pickerView.dataSource = self
         baseView.pickerView.delegate = self
         
@@ -39,6 +41,30 @@ final class SettingsListViewController: BaseViewController<SettingsListView> {
         viewModel?.input?.cellDidTap(nil)
         baseView.tableView.reloadData()
         baseView.hidePicker()
+    }
+    
+}
+
+// MARK: - SetUp Outputs
+
+private extension SettingsListViewController {
+    
+    func setUpOutput() {
+        viewModel?.output = .init(
+            appColorDidChange: { colorStyle in
+                let color = colorStyle?.options.shuffled().first
+                self.tabBarController?.tabBar.tintColor = color
+                self.baseView.pickerView.backgroundColor = color?.withAlphaComponent(0.3)
+                self.baseView.pickerToolbar.backgroundColor = color?.withAlphaComponent(0.5)
+                self.baseView.pickerToolbar.tintColor = color
+                self.baseView.tableView.reloadData()
+            }
+        )
+        
+        baseView.pickerDidHide = {
+            self.viewModel?.input?.cellDidTap(nil)
+            self.baseView.tableView.reloadData()
+        }
     }
     
 }
@@ -66,7 +92,7 @@ extension SettingsListViewController: UITableViewDataSource {
             
         }
         
-        if let selectedIndex = viewModel.selectedSettingsSection, selectedIndex == indexPath.item {
+        if let selectedIndex = viewModel.selectedSection, selectedIndex == indexPath.item {
             cell.representAsSelected()
         }
         
@@ -107,6 +133,7 @@ extension SettingsListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UIPickerViewDataSource
 
 extension SettingsListViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -114,7 +141,7 @@ extension SettingsListViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch viewModel?.selectedSettingsSection ?? 0 {
+        switch viewModel?.selectedSection ?? 0 {
         case 0: return SettingsJourney.GeneralSettings.Styles.AppStyle.allCases.count
         case 1: return SettingsJourney.GeneralSettings.Styles.ColourStyle.allCases.count
         default: return 0
@@ -122,20 +149,20 @@ extension SettingsListViewController: UIPickerViewDataSource {
     }
 }
 
+// MARK: - UIPickerViewDelegate
+
 extension SettingsListViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch viewModel?.selectedSettingsSection ?? 0 {
-        case 0: return SettingsJourney.GeneralSettings.Styles.AppStyle.allCases[row].title
-        case 1: return SettingsJourney.GeneralSettings.Styles.ColourStyle.allCases[row].title
+        switch viewModel?.selectedSection ?? 0 {
+        case 0: return SettingsJourney.GeneralSettings.Styles.AppStyle(rawValue: row)?.title
+        case 1: return SettingsJourney.GeneralSettings.Styles.ColourStyle(rawValue: row)?.title
         default: return "--"
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         viewModel?.input?.pickerDidSelectRow(row)
-        
-        baseView.tableView.reloadRows(at: [IndexPath(item: viewModel?.selectedSettingsSection ?? 0, section: 0)], with: .none)
     }
 
 }

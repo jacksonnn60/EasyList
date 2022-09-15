@@ -6,17 +6,40 @@
 //
 
 import UIKit
+import Resolver
 
 final class SettingsListCell: UITableViewCell, IdentifiableView {
     
-    let titleLabel: UILabel = {
+    @OptionalInjected private var generalSettings: SettingsJourney.GeneralSettings?
+    
+    private var color: UIColor? {
+        generalSettings?.colourStyle.options.shuffled().first
+    }
+    
+    // MARK: - View Components
+    
+    lazy var titleLabel: UILabel = {
         return $0
     }(UILabel())
     
-    let currentOptionLabel: UILabel = {
-        $0.font = .systemFont(ofSize: 12, weight: .semibold)
+    lazy var currentOptionLabel: UILabel = {
+        $0.textColor = color ?? .black
+        $0.font = .systemFont(ofSize: 14, weight: .bold)
         return $0
     }(UILabel())
+
+//    private lazy var stackView: UIStackView = { stackView in
+//        stackView.distribution = .fillEqually
+//        stackView.axis = .horizontal
+//
+//        generalSettings?.appStyle.options.forEach { systemImageName in
+//            let imageView = UIImageView(frame: .init(origin: .zero, size: .init(width: 18, height: 18)))
+//            imageView.image = .init(systemName: systemImageName)
+//            stackView.addArrangedSubview(imageView)
+//        }
+//
+//        return stackView
+//    }(UIStackView())
     
     // MARK: - Init
     
@@ -44,7 +67,7 @@ final class SettingsListCell: UITableViewCell, IdentifiableView {
     
     private func addComponents() {
         contentView.addSubview(titleLabel)
-        contentView.addSubview(currentOptionLabel)
+        contentView.addSubview(currentOptionLabel) 
     }
     
     private func anchorViews() {
@@ -56,6 +79,12 @@ final class SettingsListCell: UITableViewCell, IdentifiableView {
             make.centerY.equalToSuperview()
             make.right.equalToSuperview().inset(16)
         }
+//        if titleLabel.text == SettingsJourney.GeneralSettings.Styles.AppStyle.sectionTitle {
+//            stackView.snp.makeConstraints { make in
+//                make.left.equalTo(titleLabel.snp.right).offset(16)
+//                make.centerY.equalToSuperview()
+//            }
+//        }
     }
 
     func representAsSelected() {
@@ -63,7 +92,7 @@ final class SettingsListCell: UITableViewCell, IdentifiableView {
     }
     
     func representAsDefault() {
-        currentOptionLabel.textColor = .black
+        currentOptionLabel.textColor = color ?? .black
     }
     
 }

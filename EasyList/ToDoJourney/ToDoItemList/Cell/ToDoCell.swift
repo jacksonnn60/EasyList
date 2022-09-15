@@ -7,11 +7,16 @@
 
 import UIKit
 import SnapKit
+import Resolver
 
 final class ToDoCell: UITableViewCell, IdentifiableView {
     
+    @OptionalInjected private var generalSettings: SettingsJourney.GeneralSettings?
+    
+    // MARK: - View components
+    
     lazy var checkBox: CheckBox = {
-        $0.mainColor = .systemGreen
+        $0.mainColor = generalSettings?.colourStyle.options.shuffled().first ?? .systemBlue
         return $0
     }(CheckBox())
     

@@ -31,6 +31,7 @@ final class DaysListView: UIView {
         $0.preferredDatePickerStyle = .wheels
         $0.backgroundColor = .systemTeal.withAlphaComponent(0.2)
         $0.minimumDate = Date()
+        
         return $0
     }(UIDatePicker())
     

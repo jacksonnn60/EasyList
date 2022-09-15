@@ -10,7 +10,7 @@ import Resolver
 
 struct AppStyleAnimatedView: View {
     
-    @Injected var generalSettings: SettingsJourney.GeneralSettings
+    var generalSettings: SettingsJourney.GeneralSettings
     
     var elementsCount: Int = 10
     
@@ -72,6 +72,6 @@ struct AppStyleAnimatedView: View {
 
 struct GeometryAnimationViewPreviews: PreviewProvider {
     static var previews: some View {
-        AppStyleAnimatedView()
+        AppStyleAnimatedView(generalSettings: .init())
     }
 }

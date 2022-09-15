@@ -17,9 +17,9 @@ class SettingsJourney {
         var colourStyle: Styles.ColourStyle = .happy
         
         enum Styles {
-            enum ColourStyle: CaseIterable {
-                case sad
-                case happy
+            enum ColourStyle: Int, CaseIterable {
+                case sad = 0
+                case happy = 1
                 
                 static var sectionTitle: String {
                     return "Colour Style"
@@ -54,10 +54,10 @@ class SettingsJourney {
                 
             }
             
-            enum AppStyle: CaseIterable {
-                case geometry
-                case animals
-                case flora
+            enum AppStyle: Int, CaseIterable {
+                case geometry = 0
+                case animals = 1
+                case flora = 2
                 
                 static var sectionTitle: String {
                     return "App Style"
